@@ -27,7 +27,7 @@
 </head>
 <body id="body">
 
-    <div id="app" class="w-full relative">
+    <div id="app" class="w-full relative app-container">
         <header-component></header-component>
         @yield('main')
     </div>

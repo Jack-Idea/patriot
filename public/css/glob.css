@@ -2,8 +2,10 @@
 
 :root {
     --main-color: #fff;
-    --accent-color: #004f99;
-    --accent-color-second: #ff0002;
+    --bg-color: rgb(242, 248, 252);
+    /* --accent-color: #004f99; */
+    --accent-color: #3b82f6;
+    --accent-color-second: #eb0000;
     --olympus-color: #9c8061;
     --index: calc(1vw + 1vh);
 }
@@ -13,7 +15,7 @@
 }
 
 html {
-    scroll-behavior: smooth !important;
+    /* scroll-behavior: smooth !important; */
 }
 
 body {
@@ -30,24 +32,24 @@ select {
 
 /* SCROLLBAR */
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 7px;
-}
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
     background: var(--main-bg-color);
-}
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
     background: #cdd1c1;
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
     background: rgba(173, 56, 215, 1);
-}
+} */
 /* SCROLLBAR END */
 
 h1, h2, h3, h4, h5, h6 {
@@ -71,11 +73,11 @@ img {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    /* max-width: 1920px !important; */
+    max-width: 1920px !important;
 }
 
 .logo {
-    width: calc(var(--index)*5);
+    width: 100px;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
@@ -91,12 +93,28 @@ img {
         } */
 }
 
+header {
+    /* max-width: 1920px; */
+    transition: all .5s ease-in-out;
+    /* background: rgba(0, 0, 0, .7); */
+}
+header nav>a {
+    /* color: var(--accent-color); */
+}
+.uk-sticky-below {
+    background: var(--accent-color);
+}
+.uk-sticky-below img {
+    width: 75px;
+    transition: all .5s ease-in-out;
+}
+
 .org-item {
     width: 100%;
     height: 100%;
 }
 
-.patriot {
+/* .patriot {
     background: url("../img/patriot.jpg") no-repeat center center / cover;
 }
 
@@ -114,7 +132,7 @@ img {
 
 .fields {
     background: url("../img/fields.jpg") no-repeat center center / cover;
-}
+} */
 
 .selector-text {
     cursor: pointer;
@@ -137,28 +155,7 @@ img {
 .main-phone-icon {
     width: calc(var(--index)*1.2);
 }
-.btn-to-site {
-    text-transform: uppercase;
-    background: var(--accent-color);
-    padding: 8px 32px;
-    border-radius: 8px;
-    font-size: calc(var(--index)*0.7);
-    transition: all .3s ease-in-out;
-}
-.btn-to-site:hover {
-    color: #fff;
-    text-decoration: none;
-}
-.btn-to-site__icon {
-    width: calc(var(--index)*1.2);
-}
 @media screen and (min-width: 1920px) {
-    body {
-        font-size: 30px !important;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        font-size: 50px !important;
-    }
 }   
 @media screen and (max-width: 768px) {
     .logo {
@@ -172,8 +169,5 @@ img {
     }
     .main-phone-icon {
         width: calc(var(--index)*2.3);
-    }
-    .btn-to-site {
-        font-size: calc(var(--index)*1);
     }
 }

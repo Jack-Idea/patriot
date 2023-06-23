@@ -11,6 +11,10 @@ class LandingControler extends Controller
         return view('layouts.main');
     }
 
+    public function toPatriot() {
+        return view('layouts.patriot');
+    }
+
     public function sendQuiz(Request $request) {
         $firstname = request('firstname');
         $lastname = request('lastname');

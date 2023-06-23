@@ -15,6 +15,7 @@ use App\Http\Controllers\LandingControler;
 */
 
 Route::get('/', [LandingControler::class, 'index']);
+Route::get('/patriot', [LandingControler::class, 'toPatriot']);
 Route::post('/send-msg', [LandingControler::class, 'sendQuiz']);
 
 Auth::routes();
