@@ -60,6 +60,7 @@
     body, section {
         background: var(--bg-color) !important;
         max-height: 1080px !important;
+        font-family: 'Oswald', sans-serif;
     }
     .container {
         max-width: 1920px;

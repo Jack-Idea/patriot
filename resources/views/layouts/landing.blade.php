@@ -4,10 +4,6 @@
 
 @section('main')
 
-    <section class="wrapper relative mx-auto"></section>
-        <section class="content">
-            <landing-component></landing-component>
-        </section>
-    </section>
+        <landing-component></landing-component>
 
 @endsection

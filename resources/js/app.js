@@ -22,6 +22,8 @@ window.Vue = require('vue').default;
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('main-component', require('./components/MainComponent.vue').default);
 Vue.component('landing-component', require('./components/LandingComponent.vue').default);
+Vue.component('coaches-component', require('./components/CoachesComponent.vue').default);
+Vue.component('news-component', require('./components/NewsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
