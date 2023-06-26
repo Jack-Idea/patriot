@@ -1,5 +1,5 @@
 <template>
-    <header v-show="header" class="text-white body-font" uk-sticky>
+    <header id="header" v-show="header" class="text-white body-font h-[70px]" uk-sticky>
         <div class="container mx-auto flex flex-wrap px-[5%] py-3 flex-col md:flex-row items-center">
             <a href="/patriot">
                 <img src="img/logo.png" class="logo" alt="">
@@ -32,6 +32,9 @@
                 let href = window.location.pathname
                 if (href !== '/') {
                     this.header = true
+                }
+                if (href === '/policy' || href === '/agreement') {
+                    document.getElementById('header').style = 'background: var(--accent-color);'
                 }
             }
         }

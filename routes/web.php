@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingControler;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\HelpPagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,12 @@ use App\Http\Controllers\LandingControler;
 |
 */
 
-Route::get('/', [LandingControler::class, 'index']);
-Route::get('/patriot', [LandingControler::class, 'toPatriot']);
-Route::post('/send-msg', [LandingControler::class, 'sendQuiz']);
+Route::get('/', [LandingController::class, 'index']);
+Route::get('/patriot', [LandingController::class, 'toPatriot']);
+Route::post('/send-msg', [LandingController::class, 'sendQuiz']);
+// HELP PAGES
+Route::get('/policy', [HelpPagesController::class, 'policyPage']);
+Route::get('/agreement', [HelpPagesController::class, 'agreementPage']);
 
 Auth::routes();
 

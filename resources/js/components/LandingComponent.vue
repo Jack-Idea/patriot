@@ -1,15 +1,16 @@
 <template>
-    <section class="mt-[-84px]">
+    <section id="mainSection" class="mt-[-70px]">
+    <!-- <section id="mainSection" class=""> -->
         <div id="heroPage" class="container hero-container flex w-full h-screen px-0 relative">
             <div id="mainBg" class="flex w-full h-full absolute left-0"></div> 
             <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
             <div class="w-full lg:w-2/3 h-full flex relative items-center justify-center lg:justify-start">
-                <div class="flex flex-col mt-[-200px] lg:mt-[-100px] p-[5%] lg:p-0 lg:pl-[10%]">
+                <div class="flex flex-col mt-[-200px] lg:mt-[-100px] p-[5%] lg:p-0 lg:pl-[7%]">
                     <p class="uppercase font-light text-gray-200 text-sm text-center lg:text-left" style="text-shadow: 2px 2px 5px #000;">Новороссийская городская общественная организация</p>
                     <h1 class="text-white text-5xl uppercase font-medium mt-3 text-center lg:text-left" style="text-shadow: 2px 2px 5px #000;"> Спортивный клуб «Патриот»</h1>
                     <p class="uppercase text-gray-200 font-light text-sm mt-3 text-center lg:text-left lg:ml-auto" style="text-shadow: 2px 2px 5px #000;">имени Андрея Владимировича Фомина</p>
                 </div>
-                <div id="leftBottomBar" class="left-bar absolute bottom-0 left-0 hidden lg:flex flex-col w-full h-1/4 bg-white cursor-pointer justify-center p-[5%] lg:p-0 lg:pl-[10%]">
+                <div id="leftBottomBar" class="left-bar absolute bottom-0 left-0 hidden lg:flex flex-col w-full h-1/4 bg-white cursor-pointer justify-center p-[5%] lg:p-0 lg:pl-[7%]">
                     <p class="uppercase font-medium text-[#2d2d2d] mb-5">Спортивные секции</p>
                     <p class="text-[#2d2d2d] font-light">Все тренировки проходят в современных залах со специальным покрытием</p>
                     <p class="text-[#2d2d2d] font-light">Помещения оснащены многофункциональными системами вентиляции и кондиционирования</p>
@@ -75,12 +76,13 @@
             <div class="flex w-full flex-wrap mt-20 justify-between">
                 <div class="flex flex-wrap relative xl:w-2/3 justify-between xl:justify-start">
                     <img id="orientirImg" src="img/benefits/box-hall.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl" alt="">
-                    <div class="lg:w-[30%] lg:ml-4 my-4 lg:my-0 p-3 flex flex-col justify-center">
+                    <div class="w-full lg:w-[30%] lg:ml-4 my-4 lg:my-0 p-3 flex flex-col justify-center">
                         <p v-for="benefit in benefits.slice(0, 3)" class="text-[#2d2d2d] p-3 border-gray-200 text-center border-b-2 benefit-text">{{ benefit }}</p>
                     </div>
-                    <img src="img/benefits/spa.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl lg:ml-4" alt="">
-                    <img src="img/turnir.jpg" class="filter-imgs w-full lg:w-[68%] xl:w-[65%] shadow-xl rounded-xl mt-4" alt="">
-                    <div class="lg:w-[30%] mt-4 lg:ml-4 p-3 flex flex-col justify-center">
+                    <img src="img/benefits/sport-hall.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl lg:ml-4" alt="">
+                    <!-- <img src="img/benefits/spa.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl lg:ml-4" alt=""> -->
+                    <img src="img/turnir.jpg" class="filter-imgs w-full lg:w-[68%] xl:w-[62%] shadow-xl rounded-xl mt-4" alt="">
+                    <div class="w-full lg:w-[30%] mt-4 lg:ml-4 p-3 flex flex-col justify-center">
                         <p v-for="benefit in benefits.slice(3, 6)" class="text-[#2d2d2d] p-3 border-gray-200 text-center border-b-2 benefit-text">{{ benefit }}</p>
                     </div>
                 </div>
@@ -91,14 +93,17 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap xl:w-2/3 mt-4 justify-between xl:justify-start">
-                    <div class="lg:w-[35%] xl:w-[30%] p-3 flex flex-col justify-center">
-                        <p v-for="benefit in benefits.slice(9, 12)" class="text-[#2d2d2d] p-3 border-gray-200 text-center border-b-2 benefit-text">{{ benefit }}</p>
+                    <div class="w-full lg:w-[35%] xl:w-[30%] p-3 flex flex-col justify-center">
+                        <p v-for="benefit in benefits.slice(9, 11)" class="text-[#2d2d2d] p-3 border-gray-200 text-center border-b-2 benefit-text">{{ benefit }}</p>
                     </div>
-                    <img src="img/benefits/sport-hall.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl lg:ml-4 mt-4 lg:mt-0" alt="">
-                    <img src="img/benefits/group-hall.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl lg:ml-4 mt-4 lg:mt-0" alt="">
+                    <img src="img/benefits/group-hall.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl lg:ml-4" alt="">
+                    <img src="img/benefits/spa.jpg" class="filter-imgs w-full lg:w-[30%] shadow-xl rounded-xl lg:ml-4 mt-4 lg:mt-0" alt="">
                 </div>
-                <div class="xl:w-1/3 flex flex-wrap mt-4 hidden xl:flex">
-                    <img id="rightImg" src="img/benefits/field.jpg" class="filter-imgs w-full shadow-xl rounded-xl" alt="">
+                <div class="xl:w-1/3 flex flex-wrap mt-4 xl:justify-start items-center">
+                    <!-- <img id="rightImg" src="img/benefits/field.jpg" class="filter-imgs w-full shadow-xl rounded-xl" alt=""> -->
+                    <div class="w-full p-3 flex flex-col justify-center">
+                        <p v-for="benefit in benefits.slice(11, 13)" class="text-[#2d2d2d] p-3 border-gray-200 text-center border-b-2 benefit-text">{{ benefit }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,19 +120,19 @@
                 </a>
             </div>
         </div>
-        <!-- NEWS -->
-        <div class="container min-h-screen py-20 relative flex flex-col justify-between" style="background: url('img/cups.jpg') no-repeat center top / cover; filter: sepia(30%)">
+        <!-- INFO -->
+        <div class="container info-cont py-20 relative flex flex-col" style="background: url('img/cups.jpg') no-repeat center top / cover; filter: sepia(30%)">
             <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
             <h3 class="uppercase font-normal text-center lg:text-left text-3xl text-white relative leading-10">
                 Каждый месяц!
             </h3>
-            <div class="flex justify-center">      
+            <div class="flex justify-center h-full items-center">      
                 <h3 class="uppercase font-normal my-10 text-lg md:text-3xl text-white relative lg:leading-10 text-center lg:w-8/12">
                     Для наших воспитанников мы проводим внутренние городские соревнования, а лучших отправляем на областные!
                 </h3>
             </div>
-            <div class="grid lg:grid-cols-3 gap-5 relative">
-                <div class="bg-white shadow-xl bg-opacity-90 text-[#2d2d2d] flex flex-col h-full p-10 items-center justify-center relative rounded-lg overflow-hidden">
+            <div class="grid lg:grid-cols-3 gap-5 relative lg:absolute lg:left-0 lg:bottom-[-75px] lg:px-[5%]">
+                <div class="bg-white shadow-xl text-[#2d2d2d] flex flex-col h-full p-10 items-center justify-center relative rounded-lg overflow-hidden">
                     <p class="text-center text-gray-600">Занятия проводят опытные тренера-педагоги, за плечами которых спортивные достижения и звания</p>
                     <div class="w-20 -rotate-45 absolute -right-6 -bottom-1">
                         <span class="bg-white flex w-full h-4"></span>
@@ -135,7 +140,7 @@
                         <span class="bg-red-500 flex w-full h-4"></span>
                     </div>
                 </div>
-                <div class="bg-white shadow-xl bg-opacity-90 text-[#2d2d2d] flex flex-col h-full p-10 items-center justify-center relative rounded-lg overflow-hidden">
+                <div class="bg-white shadow-xl text-[#2d2d2d] flex flex-col h-full p-10 items-center justify-center relative rounded-lg overflow-hidden">
                     <p class="text-center text-gray-600">В летний период проводятся детские спортивные сборы, тренировки на улице, организуются походы, поездки на море и экскурсии</p>
                     <div class="w-20 -rotate-45 absolute -right-6 -bottom-1">
                         <span class="bg-white flex w-full h-4"></span>
@@ -143,7 +148,7 @@
                         <span class="bg-red-500 flex w-full h-4"></span>
                     </div>
                 </div>
-                <div class="bg-white shadow-xl bg-opacity-90 text-[#2d2d2d] flex flex-col h-full p-10 items-center justify-center relative rounded-lg overflow-hidden">
+                <div class="bg-white shadow-xl text-[#2d2d2d] flex flex-col h-full p-10 items-center justify-center relative rounded-lg overflow-hidden">
                     <p class="text-center text-gray-600">Особое внимание уделяется нравственному и физическому воспитанию самых маленьких членов нашего Клуба</p>
                     <div class="w-20 -rotate-45 absolute -right-6 -bottom-1">
                         <span class="bg-white flex w-full h-4"></span>
@@ -154,7 +159,7 @@
             </div>
         </div>
         <!-- NEWS -->
-        <div class="container min-h-screen py-20">
+        <div class="container min-h-screen py-20 lg:mt-[75px]">
             <h3 class="uppercase font-medium text-3xl text-[var(--accent-color)] text-center lg:text-left">Последние новости</h3>
             <news-component></news-component>
             <div class="row flex justify-center w-full mt-16">
@@ -206,6 +211,21 @@
     .benefit-text:last-child {
         border: none;
     }
+    .info-cont {
+        height: 80vh;
+        max-height: 1080px;
+    }
+    @media screen and (max-width: 1024px) {
+        .info-cont {
+            height: auto;
+            max-height: auto;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .logo {
+            width: 75px !important;
+        }
+    }
 </style>
 
 <script>
@@ -228,6 +248,8 @@
                 document.addEventListener('DOMContentLoaded', () => {
                     let windowWidth = window.innerWidth
                     let windowHeight = window.innerHeight
+                    // let headerHeight = document.getElementById('header').clientHeight
+                    // document.getElementById('mainSection').style = 'margin-top: -'+headerHeight+'px;'
                     document.getElementById('heroPage').style = 'height:'+windowHeight+'px;'
                     let itemsWidth = document.getElementById('phoneBtn').clientWidth
                     let bar = document.getElementById('bottomBar')
@@ -242,7 +264,6 @@
                         startLanding()
                         // let benefitImg = document.querySelectorAll('.benefit-img')
                         let benefitImg = document.getElementById('orientirImg');
-                        console.log(benefitImg.clientHeight)
                         let slaveImg = document.getElementById('rightImg');
                         slaveImg.style = 'height:'+benefitImg.clientHeight+'px;'
                         // benefitImg.forEach((item) => {

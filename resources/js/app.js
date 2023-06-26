@@ -20,6 +20,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 Vue.component('main-component', require('./components/MainComponent.vue').default);
 Vue.component('landing-component', require('./components/LandingComponent.vue').default);
 Vue.component('coaches-component', require('./components/CoachesComponent.vue').default);

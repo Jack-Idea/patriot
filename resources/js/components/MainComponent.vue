@@ -94,6 +94,7 @@
     }
     .logo {
         width: calc(var(--index)*5);
+        transform: scale(1);
     }
     .main-org-phone:hover {
         text-decoration: none;
@@ -194,6 +195,15 @@
         }
         .main-title {
             font-size: calc(var(--index)*1.3);
+        }
+        .main-org-phone-wrap {
+            height: calc(var(--index)*5);
+        }
+        .main-org-phone {
+            font-size: calc(var(--index)*1.5);
+        }
+        .main-phone-icon {
+            width: calc(var(--index)*2.3);
         }
     }
 </style>

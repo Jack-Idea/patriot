@@ -30,6 +30,7 @@
     <div id="app" class="w-full relative app-container">
         <header-component></header-component>
         @yield('main')
+        <footer-component></footer-component>
     </div>
 
 
