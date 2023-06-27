@@ -25,6 +25,9 @@ Vue.component('main-component', require('./components/MainComponent.vue').defaul
 Vue.component('landing-component', require('./components/LandingComponent.vue').default);
 Vue.component('coaches-component', require('./components/CoachesComponent.vue').default);
 Vue.component('news-component', require('./components/NewsComponent.vue').default);
+// ADMIN
+Vue.component('admin-component', require('./components/AdminComponent.vue').default);
+Vue.component('add-news-component', require('./components/AddNewsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

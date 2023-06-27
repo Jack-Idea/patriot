@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\HelpPagesController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,12 @@ Route::get('/policy', [HelpPagesController::class, 'policyPage']);
 Route::get('/agreement', [HelpPagesController::class, 'agreementPage']);
 
 Auth::routes();
+
+// ADMIN
+Route::get('/admin', [AdminController::class, 'index']);
+Route::post('/store-news-img', [AdminController::class, 'updateImg']);
+Route::post('/store-news-imgs', [AdminController::class, 'updateImgs']);
+    
+//DELETE HOME
+Route::get('/welcome', [AdminController::class, 'welcome']);
 
