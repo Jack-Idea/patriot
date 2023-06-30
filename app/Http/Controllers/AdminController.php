@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use App\Models\News;
 
 class AdminController extends Controller
 {
@@ -21,9 +22,21 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    //DELETE HOME
+    //DELETE HOME BEFORE PRODUCTION
     public function welcome() {
         return view('home');
+    }
+
+    // SAVE NEWS
+    public function storeNews(Request $request) {
+        News::create([
+            'title' => request('title'),
+            'description' => request('description'),
+            'img' => request('img'),
+            'imgs' => request('imgs'),
+        ]);
+        $msg_status = 'Новость успешно сохранена';
+        return compact('msg_status');
     }
 
     // UPDATE 1 IMG

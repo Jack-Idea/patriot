@@ -161,7 +161,7 @@
         <!-- NEWS -->
         <div class="container min-h-screen py-20 lg:mt-[75px]">
             <h3 class="uppercase font-medium text-3xl text-[var(--accent-color)] text-center lg:text-left">Последние новости</h3>
-            <news-component></news-component>
+            <news-component :quantity="8"></news-component>
             <div class="row flex justify-center w-full mt-16">
                 <a href="/news" class="main-btn uppercase shadow-xl">
                     Все новости

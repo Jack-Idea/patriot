@@ -4,7 +4,7 @@
             <div class="flex w-full items-center">
                 <div class="w-1/3 h-0.5 bg-white flex justify-center"></div>
                 <a href="/patriot" class="w-1/3 flex justify-center">
-                    <img src="img/logo.png" class="logo w-40 scale-100" alt="">
+                    <img src="/img/logo.png" class="logo w-40 scale-100" alt="">
                 </a>
                 <div class="w-1/3 h-0.5 bg-white flex justify-center"></div>
             </div>
