@@ -2,6 +2,10 @@ header {
     background: var(--accent-color);
 }
 
+.logo {
+    transform: scale(1.2);
+}
+
 .news-card {
     font-family: 'Oswald', sans-serif;
 }

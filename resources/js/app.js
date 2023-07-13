@@ -26,6 +26,10 @@ Vue.component('landing-component', require('./components/LandingComponent.vue').
 Vue.component('coaches-component', require('./components/CoachesComponent.vue').default);
 Vue.component('news-component', require('./components/NewsComponent.vue').default);
 Vue.component('one-news-component', require('./components/OneNewsComponent.vue').default);
+// PARENTS
+Vue.component('parents-main-component', require('./components/parents/MainComponent.vue').default);
+Vue.component('parents-sections-component', require('./components/parents/SectionsComponent.vue').default);
+Vue.component('parents-enrollment-component', require('./components/parents/EnrollmentComponent.vue').default);
 // ADMIN
 Vue.component('admin-component', require('./components/AdminComponent.vue').default);
 Vue.component('add-news-component', require('./components/AddNewsComponent.vue').default);

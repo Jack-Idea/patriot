@@ -15,7 +15,7 @@
                 </div>
                 <div class="w-1/3"></div>
             </div>
-            <div class="flex w-full justify-between items-end">
+            <div class="flex flex-col lg:flex-row w-full justify-between items-end">
                 <a href="/policy" class="hover:text-white">Политика конфиденциальности</a>
                 <span class="flex items-center mt-3 font-light"><span>{{ todayYear }}</span><span class="mx-2 text-lg">&copy;</span><span>Все права защищены.</span></span>
                 <a href="/agreement" class="hover:text-white">Пользовательское соглашение</a>

@@ -81,6 +81,10 @@
         border: 1px solid var(--accent-color);
         outline: none;
     }
+
+    .news-card__img, img {
+        filter: sepia(30%);
+    }
 </style>
 
 <script>

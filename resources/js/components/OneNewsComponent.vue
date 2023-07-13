@@ -3,14 +3,14 @@
         <div class="flex w-[85%]">
             <h4 class="text-[#424242] text-2xl font-medium">{{ news.title }}</h4>
         </div>
-        <div class="flex flex-wrap mt-10 gap-8">
-            <div class="w-[40%]">
+        <div class="flex flex-wrap flex-col md:flex-row mt-10 gap-8">
+            <div class="md:w-[40%]">
                 <img v-if="news" :src="'/img/uploads/news/'+news.img" class="w-full" alt="">
             </div>
-            <div class="w-[45%]">
+            <div class="md:w-[45%]">
                 <p class="text-[#555]">{{ news.description }}</p>
             </div>
-            <div class="w-[85%] flex flex-wrap gap-4">
+            <div class="lg:w-[85%] flex flex-wrap gap-4">
                 <div v-if="news" v-for="img in news.imgs" class="multiple-imgs">
                     <img :src="'/img/uploads/news/'+img.img" class="w-full" alt="">
                 </div>
@@ -67,14 +67,17 @@
             news() {
                 setTimeout(() => {
                     let imgs = document.querySelectorAll('.multiple-imgs')
-                    imgs.forEach((item) => {
-                        let ratio = item.clientWidth / item.clientHeight
-                        if (ratio === 1) {
-                            item.classList.add('w-[25%]')
-                        } else {
-                            item.classList.add('w-[37.5%]')
-                        }
-                    })
+                    let clientW = window.innerWidth
+                    if (clientW >= 768) {
+                        imgs.forEach((item) => {
+                            let ratio = item.clientWidth / item.clientHeight
+                            if (ratio === 1) {
+                                item.classList.add('w-[25%]')
+                            } else {
+                                item.classList.add('w-[37.5%]')
+                            }
+                        })
+                    }
 
                 }, 1000)
             }

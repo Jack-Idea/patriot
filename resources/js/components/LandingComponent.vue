@@ -34,7 +34,7 @@
                     <div class="right-bar-items w-1/2 lg:w-1/4 flex relative">
                         <img src="img/judo.jpg" class="w-full" style="filter: sepia(30%);" alt="">
                         <div class="kinds-titles absolute bg-black w-full h-full bg-opacity-60 flex items-end" style="clip-path: polygon(0 35%, 0% 100%, 100% 100%);">
-                            <p class="flex p-[15%]">Самбо</p>
+                            <p class="flex p-[15%]">Дзюдо</p>
                         </div>
                     </div>
                     <div class="right-bar-items w-1/2 lg:w-1/4 flex relative">
@@ -46,7 +46,7 @@
                     <div class="right-bar-items w-1/2 lg:w-1/4 relative flex">
                         <img src="img/sambo.jpg" class="w-full" style="filter: sepia(30%);" alt="">
                         <div class="kinds-titles absolute bg-black w-full h-full bg-opacity-60 flex items-end" style="clip-path: polygon(0 35%, 0% 100%, 100% 100%);">
-                            <p class="flex p-[15%]">Дзюдо</p>
+                            <p class="flex p-[15%]">Самбо</p>
                         </div>
                     </div>
                 </div>

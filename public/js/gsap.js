@@ -26,3 +26,8 @@ function startLanding() {
     });
     gsap.to('.hero-benefits', {scaleY: 1, duration: 1, delay: 2, ease: 'power2'});
 }
+
+function parentKinds(prevId, nextId) {
+    gsap.fromTo('.parent-kind-info-'+prevId, {x: 0, opacity: 1}, {x: 200, opacity: 0, duration: 0.3});
+    gsap.fromTo('.parent-kind-info-'+nextId, {x: -200, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, delay: 0.3});
+}

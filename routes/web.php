@@ -5,6 +5,8 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\HelpPagesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CoachesController;
+use App\Http\Controllers\ParentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,11 @@ Route::get('/get-news', [NewsController::class, 'getNews']);
 Route::post('/get-one-news', [NewsController::class, 'getOneNews']);
 Route::post('/destroy-news', [NewsController::class, 'destroyNews']);
 Route::get('/news/{id}', [NewsController::class, 'viewOneNews']);
+// COACHES PAGES
+Route::get('/coaches', [CoachesController::class, 'index']);
+// PARENTS PAGES
+Route::get('/parents', [ParentController::class, 'index']);
+
 
 Auth::routes();
 

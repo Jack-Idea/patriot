@@ -1,0 +1,23 @@
+header {
+    background: var(--accent-color);
+}
+
+.logo {
+    transform: scale(1.2);
+}
+
+.bg-text {
+    font-size: calc(var(--index)*7);
+    top: calc(var(--index)*1);
+    right: calc(var(--index)*2);
+    transform-origin: center right;
+    line-height: 1;
+    opacity: .5;
+    z-index: -1;
+}
+
+@media screen and (max-width: 1024px) {
+    .bg-text {
+        top: calc(var(--index)*3);
+    }
+}
