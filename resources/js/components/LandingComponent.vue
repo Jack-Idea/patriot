@@ -71,7 +71,9 @@
             </div>
         </div>
         <!-- BENEFITS -->
-        <div class="container py-20 mt-10 text-[#2d2d2d] flex flex-col">
+        <div class="container py-20 mt-10 text-[#2d2d2d] flex flex-col relative overflow-hidden">
+        <img src="/img/logo-bg.svg" class="absolute top-[10%] lg:top-[10%] left-[-80%] lg:left-0 z-[-1] opacity-30 rotate-90 lg:rotate-180 w-full" style="pointer-events: none;" alt="">   
+
             <h3 class="text-[var(--accent-color)] uppercase font-medium text-3xl text-center lg:text-left">Подробнее о преимуществах комплекса</h3>
             <div class="flex w-full flex-wrap mt-20 justify-between">
                 <div class="flex flex-wrap relative xl:w-2/3 justify-between xl:justify-start">
@@ -108,7 +110,8 @@
             </div>
         </div>
         <!-- COACHES -->
-        <div class="container py-20">
+        <div class="container py-20 relative overflow-hidden">
+        <img src="/img/logo-bg.svg" class="absolute top-[10%] lg:top-[5%] left-[-80%] lg:left-0 z-[-1] opacity-30 rotate-90 lg:rotate-0 w-full" style="pointer-events: none;" alt="">  
             <div class="flex flex-col items-center">
                 <h3 class="text-[var(--accent-color)] uppercase font-medium text-3xl">Наши тренеры</h3>
                 <p class="text-[#2d2d2d] opacity-80 mt-5 md:w-2/3 lg:w-1/2 text-center">Все тренеры Клуба являются профессиональными спортсменами, регулярно повышающими квалификацию. Они стараются стать для своих воспитанников друзьями и старшими товарищами.</p>

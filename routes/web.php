@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CoachesController;
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\CompetitionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,8 @@ Route::get('/news/{id}', [NewsController::class, 'viewOneNews']);
 Route::get('/coaches', [CoachesController::class, 'index']);
 // PARENTS PAGES
 Route::get('/parents', [ParentController::class, 'index']);
-
+// COMPETITIONS PAGES
+Route::get('/competitions', [CompetitionsController::class, 'index']);
 
 Auth::routes();
 

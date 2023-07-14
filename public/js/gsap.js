@@ -31,3 +31,13 @@ function parentKinds(prevId, nextId) {
     gsap.fromTo('.parent-kind-info-'+prevId, {x: 0, opacity: 1}, {x: 200, opacity: 0, duration: 0.3});
     gsap.fromTo('.parent-kind-info-'+nextId, {x: -200, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, delay: 0.3});
 }
+
+function competitionsMenu(flag) {
+    if (flag) {
+        gsap.to('.nav-wrap', {x: 0, duration: 0.3});
+        gsap.to('.menu-arrow', {rotateZ: 0, duration: 0.3});
+    } else {
+        gsap.to('.nav-wrap', {x: -174, duration: 0.3});
+        gsap.to('.menu-arrow', {rotateZ: -180, duration: 0.3});
+    }
+}

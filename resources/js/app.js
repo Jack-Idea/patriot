@@ -30,6 +30,11 @@ Vue.component('one-news-component', require('./components/OneNewsComponent.vue')
 Vue.component('parents-main-component', require('./components/parents/MainComponent.vue').default);
 Vue.component('parents-sections-component', require('./components/parents/SectionsComponent.vue').default);
 Vue.component('parents-enrollment-component', require('./components/parents/EnrollmentComponent.vue').default);
+// COMPETITIONS
+Vue.component('competitions-component', require('./components/competitions/CompetitionsComponent.vue').default);
+Vue.component('calendar-component', require('./components/competitions/CalendarComponent.vue').default);
+Vue.component('results-component', require('./components/competitions/ResultsComponent.vue').default);
+Vue.component('Medalists-component', require('./components/competitions/MedalistsComponent.vue').default);
 // ADMIN
 Vue.component('admin-component', require('./components/AdminComponent.vue').default);
 Vue.component('add-news-component', require('./components/AddNewsComponent.vue').default);
