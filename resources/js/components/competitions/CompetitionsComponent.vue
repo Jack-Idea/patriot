@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-16">
+    <div class="">
         <div class="nav-wrap fixed left-0 top-24 flex">
             <div class="flex flex-col bg-[var(--accent-color)] pl-10 pr-16 py-7 items-start rounded-br-lg relative">
                 <span id="marker" class="nav-btn-marker"></span>

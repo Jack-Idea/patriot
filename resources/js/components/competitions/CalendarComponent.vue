@@ -1,15 +1,25 @@
 <template>
-    <div class="mt-16 flex flex-col items-center">
-        <div class="bg-gray-300 w-full sm:w-10/12 p-5 rounded-lg">
-            <div class="uk-form-controls">
-                <select class="uk-select" id="form-stacked-select" v-model="selectedMonth" @change="showFilters">
-                    <option v-for="month in months" :value="month.id">{{ month.month }}</option>
-                </select>
+    <div class="mt-[51px] flex flex-col">
+        <div class="flex">
+            <div class="w-0 sm:w-1/12"></div>
+            <div class="bg-gray-300 w-full sm:w-10/12 p-5 rounded-lg flex items-center">
+                <div class="uk-form-controls w-10/12 lg:w-auto">
+                    <select class="uk-select" id="form-stacked-select" v-model="selectedMonth" @change="showFilters">
+                        <option v-for="month in months" :value="month.id">{{ month.month }}</option>
+                    </select>
+                </div>
+                <h6 class="text-lg text-gray-700 ml-4">{{ nowYear }}</h6>
             </div>
         </div>
-        <div class="flex flex-col">
-            <div class="flex">
-                <p>01.09 - 05.09</p>
+        <div class="flex flex-col w-full mt-10">
+            <div v-for="tournir in competitions" class="flex flex-col lg:flex-row items-center mb-8">
+                <p class="tournir-date text-blue-500 w-full lg:w-1/12 px-5 lg:pl-0 lg:text-right lg:justify-end">{{ tournir.date_start }} <span v-if="tournir.date_end" class="mx-1">-</span> {{ tournir.date_end }}</p>
+                <div class="calendar-card bg-white shadow-xl w-full sm:w-10/12 p-5 rounded-lg flex flex-col lg:flex-row items-center justify-between">
+                    <h6 class="lg:w-[40%] text-center lg:text-left mb-4 lg:mb-0 text-lg">{{ tournir.title }}</h6>
+                    <p class="flex text-gray-600 lg:w-[20%] text-center justify-center mb-4 lg:mb-0">{{ tournir.location }}</p>
+                    <p class="flex text-gray-600 lg:w-[20%] text-center lg:text-left mb-4 lg:mb-0">{{ tournir.category }}</p>
+                    <button class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</button>
+                </div>
             </div>
         </div>
     </div>
@@ -18,6 +28,12 @@
 <style scoped>
     .news-card {
         font-family: 'Oswald', sans-serif;
+    }
+    .more-btn {
+        min-width: 130px;
+    }
+    .tournir-date {
+        display: flex;
     }
     select {
         color: #2d2d2d;
@@ -39,6 +55,7 @@
         data() {
             return {
                 news: [],
+                nowYear: '',
                 months: [
                     {
                         "id": 1,
@@ -89,13 +106,44 @@
                         "month": "декабрь"
                     }
                 ],
+                competitions: [
+                    {
+                        "id": 1,
+                        "title": "Всероссийские соревнования по дзюдо «Детская Лига «Триумф Energy» (суперфинал)",
+                        "location": "Россия, Сочи",
+                        "category": "юноши и девушки до 15 лет (2009-2010 г.р.)",
+                        "date_start": "01.09",
+                        "date_end": "05.09"
+                    },
+                    {
+                        "id": 2,
+                        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
+                        "location": "Россия, Калуга",
+                        "category": "спортсмены-любители",
+                        "date_start": "05.09",
+                        "date_end": "07.09"
+                    },
+                    {
+                        "id": 3,
+                        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
+                        "location": "Россия, Краснодарский край, ст. Северская",
+                        "category": "спортсмены-любители",
+                        "date_start": "05.09",
+                        "date_end": "",
+                    }
+                ],
                 selectedMonth: 4
             }
         },
         mounted() {
+            this.startPage()
             this.getNews()
         },
         methods: {
+            startPage() {
+                let date = new Date()
+                this.nowYear = date.getFullYear()
+            },
             getNews() {
                 let self = this
                 axios

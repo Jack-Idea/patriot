@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Competition extends Model
 {
-    use HasFactory;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'location', 'category', 'date_start', 'date_end', 'regulations', 'legal', 'report' 
+    ];
 }

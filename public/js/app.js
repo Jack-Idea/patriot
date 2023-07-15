@@ -6772,11 +6772,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       news: [],
+      nowYear: '',
       months: [{
         "id": 1,
         "month": "январь"
@@ -6814,13 +6831,40 @@ __webpack_require__.r(__webpack_exports__);
         "id": 12,
         "month": "декабрь"
       }],
+      competitions: [{
+        "id": 1,
+        "title": "Всероссийские соревнования по дзюдо «Детская Лига «Триумф Energy» (суперфинал)",
+        "location": "Россия, Сочи",
+        "category": "юноши и девушки до 15 лет (2009-2010 г.р.)",
+        "date_start": "01.09",
+        "date_end": "05.09"
+      }, {
+        "id": 2,
+        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
+        "location": "Россия, Калуга",
+        "category": "спортсмены-любители",
+        "date_start": "05.09",
+        "date_end": "07.09"
+      }, {
+        "id": 3,
+        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
+        "location": "Россия, Краснодарский край, ст. Северская",
+        "category": "спортсмены-любители",
+        "date_start": "05.09",
+        "date_end": ""
+      }],
       selectedMonth: 4
     };
   },
   mounted: function mounted() {
+    this.startPage();
     this.getNews();
   },
   methods: {
+    startPage: function startPage() {
+      var date = new Date();
+      this.nowYear = date.getFullYear();
+    },
     getNews: function getNews() {
       var self = this;
       axios.get('/get-news').then(function (response) {
@@ -12837,7 +12881,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.news-card[data-v-f97008e2] {\n    font-family: 'Oswald', sans-serif;\n}\nselect[data-v-f97008e2] {\n    color: #2d2d2d;\n    border-radius: 8px;\n    width: 200px;\n}\n@media screen and (max-width: 768px) {\nselect[data-v-f97008e2] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 600px) {\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.news-card[data-v-f97008e2] {\n    font-family: 'Oswald', sans-serif;\n}\n.more-btn[data-v-f97008e2] {\n    min-width: 130px;\n}\n.tournir-date[data-v-f97008e2] {\n    display: flex;\n}\nselect[data-v-f97008e2] {\n    color: #2d2d2d;\n    border-radius: 8px;\n    width: 200px;\n}\n@media screen and (max-width: 768px) {\nselect[data-v-f97008e2] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 600px) {\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34649,64 +34693,138 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mt-16 flex flex-col items-center" }, [
-    _c("div", { staticClass: "bg-gray-300 w-full sm:w-10/12 p-5 rounded-lg" }, [
-      _c("div", { staticClass: "uk-form-controls" }, [
-        _c(
-          "select",
-          {
-            directives: [
+  return _c("div", { staticClass: "mt-[51px] flex flex-col" }, [
+    _c("div", { staticClass: "flex" }, [
+      _c("div", { staticClass: "w-0 sm:w-1/12" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-gray-300 w-full sm:w-10/12 p-5 rounded-lg flex items-center",
+        },
+        [
+          _c("div", { staticClass: "uk-form-controls w-10/12 lg:w-auto" }, [
+            _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.selectedMonth,
-                expression: "selectedMonth",
-              },
-            ],
-            staticClass: "uk-select",
-            attrs: { id: "form-stacked-select" },
-            on: {
-              change: [
-                function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.selectedMonth = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedMonth,
+                    expression: "selectedMonth",
+                  },
+                ],
+                staticClass: "uk-select",
+                attrs: { id: "form-stacked-select" },
+                on: {
+                  change: [
+                    function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selectedMonth = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    _vm.showFilters,
+                  ],
                 },
-                _vm.showFilters,
-              ],
-            },
-          },
-          _vm._l(_vm.months, function (month) {
-            return _c("option", { domProps: { value: month.id } }, [
-              _vm._v(_vm._s(month.month)),
-            ])
-          }),
-          0
-        ),
-      ]),
+              },
+              _vm._l(_vm.months, function (month) {
+                return _c("option", { domProps: { value: month.id } }, [
+                  _vm._v(_vm._s(month.month)),
+                ])
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("h6", { staticClass: "text-lg text-gray-700 ml-4" }, [
+            _vm._v(_vm._s(_vm.nowYear)),
+          ]),
+        ]
+      ),
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c(
+      "div",
+      { staticClass: "flex flex-col w-full mt-10" },
+      _vm._l(_vm.competitions, function (tournir) {
+        return _c(
+          "div",
+          { staticClass: "flex flex-col lg:flex-row items-center mb-8" },
+          [
+            _c(
+              "p",
+              {
+                staticClass:
+                  "tournir-date text-blue-500 w-full lg:w-1/12 px-5 lg:pl-0 lg:text-right lg:justify-end",
+              },
+              [
+                _vm._v(_vm._s(tournir.date_start) + " "),
+                tournir.date_end
+                  ? _c("span", { staticClass: "mx-1" }, [_vm._v("-")])
+                  : _vm._e(),
+                _vm._v(" " + _vm._s(tournir.date_end)),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "calendar-card bg-white shadow-xl w-full sm:w-10/12 p-5 rounded-lg flex flex-col lg:flex-row items-center justify-between",
+              },
+              [
+                _c(
+                  "h6",
+                  {
+                    staticClass:
+                      "lg:w-[40%] text-center lg:text-left mb-4 lg:mb-0 text-lg",
+                  },
+                  [_vm._v(_vm._s(tournir.title))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "flex text-gray-600 lg:w-[20%] text-center justify-center mb-4 lg:mb-0",
+                  },
+                  [_vm._v(_vm._s(tournir.location))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "flex text-gray-600 lg:w-[20%] text-center lg:text-left mb-4 lg:mb-0",
+                  },
+                  [_vm._v(_vm._s(tournir.category))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "main-btn more-btn flex mb-2 lg:mb-0" },
+                  [_vm._v("Подробнее")]
+                ),
+              ]
+            ),
+          ]
+        )
+      }),
+      0
+    ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-col" }, [
-      _c("div", { staticClass: "flex" }, [_c("p", [_vm._v("01.09 - 05.09")])]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -34731,7 +34849,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "mt-16" },
+    {},
     [
       _c("div", { staticClass: "nav-wrap fixed left-0 top-24 flex" }, [
         _c(
