@@ -38,6 +38,7 @@ Vue.component('Medalists-component', require('./components/competitions/Medalist
 // ADMIN
 Vue.component('admin-component', require('./components/AdminComponent.vue').default);
 Vue.component('add-news-component', require('./components/AddNewsComponent.vue').default);
+Vue.component('add-competitions-component', require('./components/competitions/AddCompetitionsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
