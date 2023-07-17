@@ -261,7 +261,7 @@
                         'competition': tournir
                     })
                     .then(function (response) {
-                        console.log(response.data.request_competition)
+                        console.log(response.data.competition)
                         setTimeout(() => {
                             self.preloader = false
                             UIkit.modal('#competition-'+index).hide();

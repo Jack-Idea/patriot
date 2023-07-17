@@ -12,13 +12,13 @@
             </div>
         </div>
         <div class="flex flex-col w-full mt-10">
-            <div v-for="tournir in competitions" class="flex flex-col lg:flex-row items-center mb-8">
-                <p class="tournir-date text-blue-500 w-full lg:w-1/12 px-5 lg:pl-0 lg:text-right lg:justify-end">{{ tournir.date_start }} <span v-if="tournir.date_end" class="mx-1">-</span> {{ tournir.date_end }}</p>
+            <div v-for="tournir in filterCompetitions" class="flex flex-col lg:flex-row items-center mb-8">
+                <p class="tournir-date text-blue-500 w-full lg:w-1/12 px-5 lg:pl-0 lg:text-right lg:justify-end">{{ tournir.date_start | moment('DD.MM') }} <span v-if="tournir.date_end" class="mx-1">-</span> {{ tournir.date_end | moment('DD.MM') }}</p>
                 <div class="calendar-card bg-white shadow-xl w-full sm:w-10/12 p-5 rounded-lg flex flex-col lg:flex-row items-center justify-between">
                     <h6 class="lg:w-[40%] text-center lg:text-left mb-4 lg:mb-0 text-lg">{{ tournir.title }}</h6>
                     <p class="flex text-gray-600 lg:w-[20%] text-center justify-center mb-4 lg:mb-0">{{ tournir.location }}</p>
                     <p class="flex text-gray-600 lg:w-[20%] text-center lg:text-left mb-4 lg:mb-0">{{ tournir.category }}</p>
-                    <button class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</button>
+                    <a :href="'/competitions/'+tournir.id" class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</a>
                 </div>
             </div>
         </div>
@@ -34,6 +34,7 @@
     }
     .tournir-date {
         display: flex;
+        font-family: 'Oswald', sans-serif;
     }
     select {
         color: #2d2d2d;
@@ -51,6 +52,7 @@
 </style>
 
 <script>
+    Vue.use(require('vue-moment'));
     export default {
         data() {
             return {
@@ -106,33 +108,9 @@
                         "month": "декабрь"
                     }
                 ],
-                competitions: [
-                    {
-                        "id": 1,
-                        "title": "Всероссийские соревнования по дзюдо «Детская Лига «Триумф Energy» (суперфинал)",
-                        "location": "Россия, Сочи",
-                        "category": "юноши и девушки до 15 лет (2009-2010 г.р.)",
-                        "date_start": "01.09",
-                        "date_end": "05.09"
-                    },
-                    {
-                        "id": 2,
-                        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
-                        "location": "Россия, Калуга",
-                        "category": "спортсмены-любители",
-                        "date_start": "05.09",
-                        "date_end": "07.09"
-                    },
-                    {
-                        "id": 3,
-                        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
-                        "location": "Россия, Краснодарский край, ст. Северская",
-                        "category": "спортсмены-любители",
-                        "date_start": "05.09",
-                        "date_end": "",
-                    }
-                ],
-                selectedMonth: 4
+                competitions: '',
+                selectedMonth: 1,
+                filterCompetitions: []
             }
         },
         mounted() {
@@ -143,33 +121,28 @@
             startPage() {
                 let date = new Date()
                 this.nowYear = date.getFullYear()
+                this.selectedMonth = date.getMonth()+1
             },
             getNews() {
                 let self = this
                 axios
-                    .get('/get-news')
+                    .post('/get-year-competitions')
                     .then(function (response) {
-                        self.news = response.data.news
+                        self.competitions = response.data.competitions
                     })
             },
             showFilters() {
-
-            },
-            formatDate() {
-                let self = this
-                let n = self.news
-                n.forEach((item) => {
-                    let date = item.created_at.split("T")
-                    date = date[0].split("-")
-                    date = date[2]+'.'+date[1]+'.'+date[0]
-                    item.created_at = date
+                this.filterCompetitions = []
+                this.competitions.forEach((item) => {
+                    if (new Date(item.date_start).getMonth()+1 === this.selectedMonth) {
+                        this.filterCompetitions.push(item)
+                    }
                 })
-
             }
         },
         watch: {
-            news() {
-                this.formatDate()
+            competitions() {
+                this.showFilters()
             }
         }
     }

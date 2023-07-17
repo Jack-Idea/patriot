@@ -58,13 +58,24 @@ class AdminCompetitionsController extends Controller
     //EDIT COMPETITION
     public function editCompetition(Request $request) {
         $request_competition = request('competition');
-        $request_competition = json_encode($request_competition);
+        $date_end = $request_competition['date_end'];
 
-        // foreach ($request_competition as $comp) {
-        //     $id = $comp->id;
-        // }
+        $competition = Competition::find($request_competition['id']);
+        $competition->title = $request_competition['title'];
+        $competition->location = $request_competition['location'];
+        $competition->category = $request_competition['category'];
+        $competition->date_start = $request_competition['date_start'];
+        if ($request_competition['date_start'] === $date_end) {
+            $date_end = null;
+        }
+        $competition->date_end = $date_end;
+        $competition->regulations_link = $request_competition['regulations_link'];
+        $competition->legal_link = $request_competition['legal_link'];
+        $competition->report_link = $request_competition['report_link'];
+
+        $competition->save();
         $msg_status = 'Соревнование изменено';
-        return compact('request_competition', 'msg_status');
+        return compact('competition', 'msg_status');
     }
     
     //DESTROY COMPETITION

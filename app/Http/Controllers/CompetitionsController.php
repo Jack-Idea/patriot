@@ -24,4 +24,15 @@ class CompetitionsController extends Controller
         $competitions = Competition::orderBy('date_start', 'asc')->whereBetween('date_start', [$year.'-01-01', $year.'-12-31'])->get();
         return compact('competitions');
     }
+
+    //SHOW COMPETITION
+    public function showCompetition() {
+        return view('competitions.show');
+    }
+
+    //GET ONE
+    public function getOneCompetition(Request $request) {
+        $competition = Competition::find(request('id'));
+        return compact('competition');
+    }
 }

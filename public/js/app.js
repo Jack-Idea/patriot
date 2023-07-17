@@ -6989,7 +6989,7 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
       axios.post('/edit-competition', {
         'competition': tournir
       }).then(function (response) {
-        console.log(response.data.request_competition);
+        console.log(response.data.competition);
         setTimeout(function () {
           self.preloader = false;
           UIkit.modal('#competition-' + index).hide();
@@ -7093,7 +7093,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
+Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7136,29 +7138,9 @@ __webpack_require__.r(__webpack_exports__);
         "id": 12,
         "month": "декабрь"
       }],
-      competitions: [{
-        "id": 1,
-        "title": "Всероссийские соревнования по дзюдо «Детская Лига «Триумф Energy» (суперфинал)",
-        "location": "Россия, Сочи",
-        "category": "юноши и девушки до 15 лет (2009-2010 г.р.)",
-        "date_start": "01.09",
-        "date_end": "05.09"
-      }, {
-        "id": 2,
-        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
-        "location": "Россия, Калуга",
-        "category": "спортсмены-любители",
-        "date_start": "05.09",
-        "date_end": "07.09"
-      }, {
-        "id": 3,
-        "title": "II Всероссийские летние спортивные игры среди спортсменов-любителей",
-        "location": "Россия, Краснодарский край, ст. Северская",
-        "category": "спортсмены-любители",
-        "date_start": "05.09",
-        "date_end": ""
-      }],
-      selectedMonth: 4
+      competitions: '',
+      selectedMonth: 1,
+      filterCompetitions: []
     };
   },
   mounted: function mounted() {
@@ -7169,28 +7151,27 @@ __webpack_require__.r(__webpack_exports__);
     startPage: function startPage() {
       var date = new Date();
       this.nowYear = date.getFullYear();
+      this.selectedMonth = date.getMonth() + 1;
     },
     getNews: function getNews() {
       var self = this;
-      axios.get('/get-news').then(function (response) {
-        self.news = response.data.news;
+      axios.post('/get-year-competitions').then(function (response) {
+        self.competitions = response.data.competitions;
       });
     },
-    showFilters: function showFilters() {},
-    formatDate: function formatDate() {
-      var self = this;
-      var n = self.news;
-      n.forEach(function (item) {
-        var date = item.created_at.split("T");
-        date = date[0].split("-");
-        date = date[2] + '.' + date[1] + '.' + date[0];
-        item.created_at = date;
+    showFilters: function showFilters() {
+      var _this = this;
+      this.filterCompetitions = [];
+      this.competitions.forEach(function (item) {
+        if (new Date(item.date_start).getMonth() + 1 === _this.selectedMonth) {
+          _this.filterCompetitions.push(item);
+        }
       });
     }
   },
   watch: {
-    news: function news() {
-      this.formatDate();
+    competitions: function competitions() {
+      this.showFilters();
     }
   }
 });
@@ -7412,6 +7393,118 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     news: function news() {
       this.formatDate();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      competitions: ''
+    };
+  },
+  mounted: function mounted() {
+    this.getNews();
+  },
+  methods: {
+    getNews: function getNews() {
+      var self = this;
+      var id = window.location.pathname;
+      id = id.split('/');
+      axios.post('/get-one-competition', {
+        'id': id
+      }).then(function (response) {
+        console.log(response.data.competition);
+        self.competitions = response.data.competition[0];
+      });
     }
   }
 });
@@ -7716,6 +7809,7 @@ Vue.component('competitions-component', (__webpack_require__(/*! ./components/co
 Vue.component('calendar-component', (__webpack_require__(/*! ./components/competitions/CalendarComponent.vue */ "./resources/js/components/competitions/CalendarComponent.vue")["default"]));
 Vue.component('results-component', (__webpack_require__(/*! ./components/competitions/ResultsComponent.vue */ "./resources/js/components/competitions/ResultsComponent.vue")["default"]));
 Vue.component('Medalists-component', (__webpack_require__(/*! ./components/competitions/MedalistsComponent.vue */ "./resources/js/components/competitions/MedalistsComponent.vue")["default"]));
+Vue.component('show-competition-component', (__webpack_require__(/*! ./components/competitions/ShowCompetitionComponent.vue */ "./resources/js/components/competitions/ShowCompetitionComponent.vue")["default"]));
 // ADMIN
 Vue.component('admin-component', (__webpack_require__(/*! ./components/AdminComponent.vue */ "./resources/js/components/AdminComponent.vue")["default"]));
 Vue.component('add-news-component', (__webpack_require__(/*! ./components/AddNewsComponent.vue */ "./resources/js/components/AddNewsComponent.vue")["default"]));
@@ -13235,7 +13329,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.news-card[data-v-f97008e2] {\n    font-family: 'Oswald', sans-serif;\n}\n.more-btn[data-v-f97008e2] {\n    min-width: 130px;\n}\n.tournir-date[data-v-f97008e2] {\n    display: flex;\n}\nselect[data-v-f97008e2] {\n    color: #2d2d2d;\n    border-radius: 8px;\n    width: 200px;\n}\n@media screen and (max-width: 768px) {\nselect[data-v-f97008e2] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 600px) {\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.news-card[data-v-f97008e2] {\n    font-family: 'Oswald', sans-serif;\n}\n.more-btn[data-v-f97008e2] {\n    min-width: 130px;\n}\n.tournir-date[data-v-f97008e2] {\n    display: flex;\n    font-family: 'Oswald', sans-serif;\n}\nselect[data-v-f97008e2] {\n    color: #2d2d2d;\n    border-radius: 8px;\n    width: 200px;\n}\n@media screen and (max-width: 768px) {\nselect[data-v-f97008e2] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 600px) {\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13308,6 +13402,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.news-card[data-v-5b39deb2] {\n    font-family: 'Oswald', sans-serif;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.more-btn[data-v-4ebc4cca] {\n    min-width: 130px;\n}\n.back-btn[data-v-4ebc4cca] {\n    width: 130px;\n    min-width: 100px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31271,6 +31389,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_style_index_0_id_4ebc4cca_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_style_index_0_id_4ebc4cca_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_style_index_0_id_4ebc4cca_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/parents/EnrollmentComponent.vue?vue&type=style&index=0&id=105dc7b8&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/parents/EnrollmentComponent.vue?vue&type=style&index=0&id=105dc7b8&scoped=true&lang=css& ***!
@@ -32212,6 +32360,47 @@ component.options.__file = "resources/js/components/competitions/ResultsComponen
 
 /***/ }),
 
+/***/ "./resources/js/components/competitions/ShowCompetitionComponent.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/competitions/ShowCompetitionComponent.vue ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ShowCompetitionComponent_vue_vue_type_template_id_4ebc4cca_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true& */ "./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true&");
+/* harmony import */ var _ShowCompetitionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShowCompetitionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ShowCompetitionComponent_vue_vue_type_style_index_0_id_4ebc4cca_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css& */ "./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ShowCompetitionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ShowCompetitionComponent_vue_vue_type_template_id_4ebc4cca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ShowCompetitionComponent_vue_vue_type_template_id_4ebc4cca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "4ebc4cca",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/competitions/ShowCompetitionComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/parents/EnrollmentComponent.vue":
 /*!*****************************************************************!*\
   !*** ./resources/js/components/parents/EnrollmentComponent.vue ***!
@@ -32559,6 +32748,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ShowCompetitionComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/parents/EnrollmentComponent.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/parents/EnrollmentComponent.vue?vue&type=script&lang=js& ***!
@@ -32772,6 +32977,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResultsComponent_vue_vue_type_style_index_0_id_5b39deb2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ResultsComponent.vue?vue&type=style&index=0&id=5b39deb2&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ResultsComponent.vue?vue&type=style&index=0&id=5b39deb2&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css&":
+/*!************************************************************************************************************************************!*\
+  !*** ./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_style_index_0_id_4ebc4cca_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=style&index=0&id=4ebc4cca&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -33049,6 +33267,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResultsComponent_vue_vue_type_template_id_5b39deb2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResultsComponent_vue_vue_type_template_id_5b39deb2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ResultsComponent.vue?vue&type=template&id=5b39deb2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ResultsComponent.vue?vue&type=template&id=5b39deb2&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true& ***!
+  \**********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_template_id_4ebc4cca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_template_id_4ebc4cca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowCompetitionComponent_vue_vue_type_template_id_4ebc4cca_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true&");
 
 
 /***/ }),
@@ -36114,7 +36349,7 @@ var render = function () {
     _c(
       "div",
       { staticClass: "flex flex-col w-full mt-10" },
-      _vm._l(_vm.competitions, function (tournir) {
+      _vm._l(_vm.filterCompetitions, function (tournir) {
         return _c(
           "div",
           { staticClass: "flex flex-col lg:flex-row items-center mb-8" },
@@ -36126,11 +36361,15 @@ var render = function () {
                   "tournir-date text-blue-500 w-full lg:w-1/12 px-5 lg:pl-0 lg:text-right lg:justify-end",
               },
               [
-                _vm._v(_vm._s(tournir.date_start) + " "),
+                _vm._v(
+                  _vm._s(_vm._f("moment")(tournir.date_start, "DD.MM")) + " "
+                ),
                 tournir.date_end
                   ? _c("span", { staticClass: "mx-1" }, [_vm._v("-")])
                   : _vm._e(),
-                _vm._v(" " + _vm._s(tournir.date_end)),
+                _vm._v(
+                  " " + _vm._s(_vm._f("moment")(tournir.date_end, "DD.MM"))
+                ),
               ]
             ),
             _vm._v(" "),
@@ -36169,8 +36408,11 @@ var render = function () {
                 ),
                 _vm._v(" "),
                 _c(
-                  "button",
-                  { staticClass: "main-btn more-btn flex mb-2 lg:mb-0" },
+                  "a",
+                  {
+                    staticClass: "main-btn more-btn flex mb-2 lg:mb-0",
+                    attrs: { href: "/competitions/" + tournir.id },
+                  },
                   [_vm._v("Подробнее")]
                 ),
               ]
@@ -36365,6 +36607,284 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "mt-16" })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/competitions/ShowCompetitionComponent.vue?vue&type=template&id=4ebc4cca&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "flex flex-col" }, [
+    _c(
+      "a",
+      {
+        staticClass:
+          "text-gray-500 w-[100px] flex hover:text-gray-500 hover:no-underline",
+        attrs: { href: "/competitions" },
+      },
+      [
+        _c(
+          "svg",
+          {
+            staticClass: "w-6 h-6 mr-2",
+            attrs: {
+              xmlns: "http://www.w3.org/2000/svg",
+              fill: "none",
+              viewBox: "0 0 24 24",
+              "stroke-width": "1.5",
+              stroke: "currentColor",
+            },
+          },
+          [
+            _c("path", {
+              attrs: {
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18",
+              },
+            }),
+          ]
+        ),
+        _vm._v("\n        Назад\n    "),
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "w-full flex flex-col items-center mt-10" }, [
+      _c("div", { staticClass: "w-full lg:w-[80%]" }, [
+        _c(
+          "h2",
+          { staticClass: "text-center lg:text-left text-2xl lg:text-3xl" },
+          [_vm._v(_vm._s(_vm.competitions.title))]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex flex-col lg:flex-row mt-10 gap-10" }, [
+          _c("div", { staticClass: "lg:w-1/2" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex flex-col lg:flex-row justify-center lg:justify-start items-center pb-4 border-b border-gray-300",
+              },
+              [
+                _c("p", { staticClass: "text-gray-600 font-medium" }, [
+                  _vm._v("Даты проведения:"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "h4",
+                  { staticClass: "text-[var(--accent-color)] ml-2 opacity-90" },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm._f("moment")(
+                          _vm.competitions.date_start,
+                          "DD.MM.YYYY"
+                        )
+                      ) + " "
+                    ),
+                    _vm.competitions.date_end
+                      ? _c("span", [_vm._v("-")])
+                      : _vm._e(),
+                    _vm._v(
+                      " " +
+                        _vm._s(
+                          _vm._f("moment")(
+                            _vm.competitions.date_end,
+                            "DD.MM.YYYY"
+                          )
+                        )
+                    ),
+                  ]
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex flex-col lg:flex-row justify-center lg:justify-start items-center mt-4 pb-4 border-b border-gray-300",
+              },
+              [
+                _c("p", { staticClass: "text-gray-600 font-medium" }, [
+                  _vm._v("Место проведения:"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "text-[var(--accent-color)] lg:ml-2 text-center lg:text-left opacity-90",
+                  },
+                  [_vm._v(_vm._s(_vm.competitions.location))]
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex flex-col lg:flex-row justify-center lg:justify-start items-center mt-4 pb-4 border-b border-gray-300",
+              },
+              [
+                _c("p", { staticClass: "text-gray-600 font-medium" }, [
+                  _vm._v("Возрастная категория:"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "text-[var(--accent-color)] lg:ml-2 text-center lg:text-left opacity-90",
+                  },
+                  [_vm._v(_vm._s(_vm.competitions.category))]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "lg:w-1/2" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "flex justify-center items-end pb-4 border-b border-gray-300",
+                attrs: {
+                  href: _vm.competitions.regulations_link,
+                  target: "_blank",
+                },
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "w-6 h-6",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "none",
+                      viewBox: "0 0 24 24",
+                      "stroke-width": "1.5",
+                      stroke: "#2d2d2d",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        d: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-[#2d2d2d] leading-4 ml-2" }, [
+                  _vm._v("Регламент"),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "flex justify-center items-end mt-4 pb-4 border-b border-gray-300",
+                attrs: { href: _vm.competitions.legal_link, target: "_blank" },
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "w-6 h-6",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "none",
+                      viewBox: "0 0 24 24",
+                      "stroke-width": "1.5",
+                      stroke: "#2d2d2d",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        d: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-[#2d2d2d] leading-4 ml-2" }, [
+                  _vm._v("Положение"),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _vm.competitions.report_link
+              ? _c(
+                  "a",
+                  {
+                    staticClass:
+                      "flex justify-center items-end mt-4 pb-4 border-b border-gray-300",
+                    attrs: {
+                      href: _vm.competitions.report_link,
+                      target: "_blank",
+                    },
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "w-6 h-6",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          "stroke-width": "1.5",
+                          stroke: "#2d2d2d",
+                        },
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            d: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z",
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-[#2d2d2d] leading-4 ml-2" }, [
+                      _vm._v("Отчет"),
+                    ]),
+                  ]
+                )
+              : _vm._e(),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -38,7 +38,9 @@ Route::get('/coaches', [CoachesController::class, 'index']);
 Route::get('/parents', [ParentController::class, 'index']);
 // COMPETITIONS PAGES
 Route::get('/competitions', [CompetitionsController::class, 'index']);
+Route::get('/competitions/{id}', [CompetitionsController::class, 'showCompetition']);
 Route::post('/get-year-competitions', [CompetitionsController::class, 'getYearCompetitions']);
+Route::post('/get-one-competition', [CompetitionsController::class, 'getOneCompetition']);
 
 Auth::routes();
 
