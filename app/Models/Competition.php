@@ -13,6 +13,6 @@ class Competition extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'location', 'category', 'date_start', 'date_end', 'regulations', 'legal', 'report' 
+        'title', 'location', 'category', 'date_start', 'date_end', 'regulations_link', 'legal_link', 'report_link' 
     ];
 }

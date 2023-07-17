@@ -10,7 +10,7 @@
                     <h1 class="text-white text-5xl uppercase font-medium mt-3 text-center lg:text-left" style="text-shadow: 2px 2px 5px #000;"> Спортивный клуб «Патриот»</h1>
                     <p class="uppercase text-gray-200 font-light text-sm mt-3 text-center lg:text-left lg:ml-auto" style="text-shadow: 2px 2px 5px #000;">имени Андрея Владимировича Фомина</p>
                 </div>
-                <div id="leftBottomBar" class="left-bar absolute bottom-0 left-0 hidden lg:flex flex-col w-full h-1/4 bg-white cursor-pointer justify-center p-[5%] lg:p-0 lg:pl-[7%]">
+                <div id="leftBottomBar" class="left-bar absolute bottom-0 left-0 hidden lg:flex flex-col w-full h-1/4 bg-white justify-center p-[5%] lg:p-0 lg:pl-[7%]">
                     <p class="uppercase font-medium text-[#2d2d2d] mb-5">Спортивные секции</p>
                     <p class="text-[#2d2d2d] font-light">Все тренировки проходят в современных залах со специальным покрытием</p>
                     <p class="text-[#2d2d2d] font-light">Помещения оснащены многофункциональными системами вентиляции и кондиционирования</p>

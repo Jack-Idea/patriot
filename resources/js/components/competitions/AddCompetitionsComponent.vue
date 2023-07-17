@@ -43,23 +43,69 @@
             <div v-if="preloader" class="main-btn bg-green-600"><div uk-spinner></div></div>
         </div>
         
-        <div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 w-full mt-16">
-                <div v-for="(item, index) in news" class="news-card bg-white flex flex-col w-full min-h-[350px] shadow-[1px_4px_10px_rgba(0,0,0,0.2)] rounded-xl relative overflow-hidden">
-                    <span v-if="!preloader" @click.prevent="destroyNews(index, item.id)" class="absolute w-10 h-10 bg-red-600 top-4 left-4 rounded-full z-[100] cursor-pointer flex justify-center items-center">
+        <div class="mt-[51px] flex flex-col">
+            <div class="flex">
+                <div class="w-0 sm:w-1/12"></div>
+                <div class="bg-gray-300 w-full sm:w-10/12 p-5 rounded-lg flex items-center">
+                    <div class="uk-form-controls w-10/12 lg:w-auto">
+                        <select class="uk-select" id="form-stacked-select" v-model="selectedMonth" @change="showFilters">
+                            <option v-for="month in years" :value="month.id">{{ month.year }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col w-full mt-10">
+                <div v-for="(tournir, index) in competitions" class="flex flex-col lg:flex-row items-center mb-8 relative">
+                    <span v-if="!preloader" @click.prevent="destroyNews(tournir.id)" class="absolute w-10 h-10 bg-red-600 top-auto right-0 rounded-full z-[100] cursor-pointer flex justify-center items-center">
                         <span uk-icon="icon: trash;"></span>
                     </span>
-                    <div class="news-card__img flex w-full h-[80%] overflow-hidden relative" :style="`background: url('img/uploads/news/${item.img}') no-repeat center center / cover;`">
-                        <div class="absolute bottom-0 flex w-full rounded-t-xl overflow-hidden">
-                            <div class="bg-white bg-opacity-70 flex w-full absolute h-full left-0" style="backdrop-filter: blur(4px);"></div>
-                            <h4 class="px-5 py-3 relative">
-                                {{ item.title }}
-                            </h4>
-                        </div>
+                    <p class="tournir-date text-blue-500 w-full lg:w-1/12 px-5 lg:pl-0 lg:text-right lg:justify-end">{{ tournir.date_start | moment('DD.MM') }} <span v-if="tournir.date_end" class="mx-1">-</span> {{ tournir.date_end | moment('DD.MM') }}</p>
+                    <div class="calendar-card bg-white shadow-xl w-full sm:w-10/12 p-5 rounded-lg flex flex-col lg:flex-row items-center justify-between">
+                        <h6 class="lg:w-[40%] text-center lg:text-left mb-4 lg:mb-0 text-lg">{{ tournir.title }}</h6>
+                        <p class="flex text-gray-600 lg:w-[20%] text-center justify-center mb-4 lg:mb-0">{{ tournir.location }}</p>
+                        <p class="flex text-gray-600 lg:w-[20%] text-center lg:text-left mb-4 lg:mb-0">{{ tournir.category }}</p>
+                        <button :uk-toggle="'target: #competition-'+index" class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</button>
                     </div>
-                    <div class="flex justify-between items-center text-[#2d2d2d] px-5 h-[20%] font-light">
-                        <a :href="'/news/'+item.id" class="flex hover:text-[#2d2d2d]">Подробнее...</a>
-                        <span class="flex font-normal opacity-50">{{ item.created_at }}</span>
+                    <!-- This is the COPETITION modal -->
+                    <div :id="'competition-'+index" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body rounded-lg py-8">
+                            <button class="uk-modal-close-default" uk-close></button>
+                            <div class="py-5">
+                                <textarea maxlength="191" rows="4" type="text" class="form-control main-input d-flex w-full text-lg mb-4" v-model="tournir.title"></textarea>
+                                <input type="text" class="w-full mb-4" v-model="tournir.location">
+                                <input type="text" class="w-full mb-4" v-model="tournir.category">
+                                <input type="date" class="w-full mb-4" v-model="tournir.date_start">
+                                <input type="date" class="w-full mb-4" v-model="tournir.date_end">
+                                <!-- Положение -->
+                                <a :href="tournir.legal_link" class="flex items-center" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--accent-color)" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    <span class="text-[#2d2d2d] ml-2">Положение</span>
+                                </a>
+                                <input type="text" class="w-full mb-4" v-model="tournir.legal_link">
+                                <!-- Регламент -->
+                                <a :href="tournir.regulations_link" class="flex items-center" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--accent-color)" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    <span class="text-[#2d2d2d] ml-2">Регламент</span>
+                                </a>
+                                <input type="text" class="w-full mb-4" v-model="tournir.regulations_link">
+                                <!-- Отчет -->
+                                <a :href="tournir.report_link" class="flex items-center" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--accent-color)" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    <span class="text-[#2d2d2d] ml-2">Отчет</span>
+                                </a>
+                                <input type="text" class="w-full mb-4" v-model="tournir.report_link">
+                            </div>
+                            <div class="flex justify-center">
+                                <button v-if="!preloader" @click.prevent="editNews(tournir, index)" class="main-btn bg-green-600 shadow-xl">Сохранить</button>
+                                <div v-if="preloader" class="main-btn bg-green-600"><div uk-spinner></div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,6 +128,17 @@
         border: 1px solid var(--accent-color);
         outline: none;
     }
+    select {
+        color: #2d2d2d;
+        border-radius: 8px;
+        width: 200px;
+    }
+    .more-btn {
+        min-width: 130px;
+    }
+    .tournir-date {
+        display: flex;
+    }
 
     .news-card__img, img {
         filter: sepia(30%);
@@ -89,6 +146,7 @@
 </style>
 
 <script>
+    Vue.use(require('vue-moment'));
     export default {
         data() {
             return {
@@ -101,7 +159,50 @@
                 legal: '',
                 regulations: '',
                 msgStatus: '',
-                news: []
+                competitions: '',
+                selectedMonth: 1,
+                years: [
+                    {
+                        "id": 1,
+                        "year": 2023
+                    },
+                    {
+                        "id": 2,
+                        "year": 2024
+                    },
+                    {
+                        "id": 3,
+                        "year": 2025
+                    },
+                    {
+                        "id": 4,
+                        "year": 2026
+                    },
+                    {
+                        "id": 5,
+                        "year": 2027
+                    },
+                    {
+                        "id": 6,
+                        "year": 2028
+                    },
+                    {
+                        "id": 7,
+                        "year": 2029
+                    },
+                    {
+                        "id": 8,
+                        "year": 2030
+                    },
+                    {
+                        "id": 9,
+                        "year": 2031
+                    },
+                    {
+                        "id": 10,
+                        "year": 2032
+                    }
+                ],
             }
         },
         mounted() {
@@ -111,17 +212,18 @@
             getNews() {
                 let self = this
                 axios
-                    .get('/get-news')
+                    .post('/get-year-competitions', {
+                        'year': self.years[self.selectedMonth-1].year
+                    })
                     .then(function (response) {
-                        self.news = response.data.news 
-                        self.formatDate()
+                        self.competitions = response.data.competitions
                     })
             },
             storeNews() {
                 let self = this
                 self.preloader = true
                 axios
-                    .post('/store-news', {
+                    .post('/store-competition', {
                         'title': self.newsTitle,
                         'location': self.location,
                         'category': self.category,
@@ -131,7 +233,6 @@
                         'regulations': self.regulations,
                     })
                     .then(function (response) {
-                        console.log(response.data)
                         setTimeout(() => {
                             self.msgStatus = response.data.msg_status
                             self.newsTitle = ''
@@ -149,11 +250,42 @@
                         }, 3000)
                     })
             },
-            destroyNews(index, id) {
+            showFilters() {
+                this.getNews()
+            },
+            editNews(tournir, index) {
+                let self = this
+                self.preloader = true
+                axios
+                    .post('/edit-competition', {
+                        'competition': tournir
+                    })
+                    .then(function (response) {
+                        console.log(response.data.request_competition)
+                        setTimeout(() => {
+                            self.preloader = false
+                            UIkit.modal('#competition-'+index).hide();
+                            self.msgStatus = response.data.msg_status
+                            self.getNews()
+                        }, 1000)
+                        setTimeout(() => {
+                            self.msgStatus = ''
+                        }, 3000)
+                    })
+                    .catch(function (error) {
+                        setTimeout(() => {
+                            console.log(error)
+                            self.preloader = false
+                            UIkit.modal('#competition-'+index).hide();
+                            self.msgStatus ='Что-то пошло не так, перезагрузите страницу и попробуйте снова'
+                        }, 1000)
+                    })
+            },
+            destroyNews(id) {
                 let self = this
                 self.preloader = true
                     axios
-                        .post('/destroy-news', {
+                        .post('/destroy-competition', {
                             'id': id
                         })
                         .then(function (response) {
@@ -167,17 +299,6 @@
                         .catch(function (error) {
                             self.msgStatus = 'Что-то пошло не так, перезагрузите страницу и попробуйте снова'
                         })
-            },
-            formatDate() {
-                let self = this
-                let n = self.news
-                n.forEach((item) => {
-                    let date = item.created_at.split("T")
-                    date = date[0].split("-")
-                    date = date[2]+'.'+date[1]+'.'+date[0]
-                    item.created_at = date
-                })
-
             }
         },
         watch: {

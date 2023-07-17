@@ -5,3 +5,18 @@
 header {
     background: var(--accent-color);
 }
+
+label {
+    color: #2d2d2d;
+    margin-bottom: 8px;
+}
+textarea, input {
+    box-shadow: 1px 1px 7px rgba(0,0,0,.3);
+    border-radius: 8px;
+    color: #2d2d2d;
+    padding: 8px;
+}
+textarea:focus, input:focus {
+    border: 1px solid var(--accent-color);
+    outline: none;
+}

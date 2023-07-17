@@ -8,6 +8,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CoachesController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\CompetitionsController;
+use App\Http\Controllers\AdminCompetitionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,6 @@ Route::get('/agreement', [HelpPagesController::class, 'agreementPage']);
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/get-news', [NewsController::class, 'getNews']);
 Route::post('/get-one-news', [NewsController::class, 'getOneNews']);
-Route::post('/destroy-news', [NewsController::class, 'destroyNews']);
 Route::get('/news/{id}', [NewsController::class, 'viewOneNews']);
 // COACHES PAGES
 Route::get('/coaches', [CoachesController::class, 'index']);
@@ -38,6 +38,7 @@ Route::get('/coaches', [CoachesController::class, 'index']);
 Route::get('/parents', [ParentController::class, 'index']);
 // COMPETITIONS PAGES
 Route::get('/competitions', [CompetitionsController::class, 'index']);
+Route::post('/get-year-competitions', [CompetitionsController::class, 'getYearCompetitions']);
 
 Auth::routes();
 
@@ -46,6 +47,10 @@ Route::get('/admin', [AdminController::class, 'index']);
 Route::post('/store-news', [AdminController::class, 'storeNews']);
 Route::post('/store-news-img', [AdminController::class, 'updateImg']);
 Route::post('/store-news-imgs', [AdminController::class, 'updateImgs']);
+Route::post('/destroy-news', [AdminController::class, 'destroyNews']);
+Route::post('/store-competition', [AdminCompetitionsController::class, 'storeCompetition']);
+Route::post('/edit-competition', [AdminCompetitionsController::class, 'editCompetition']);
+Route::post('/destroy-competition', [AdminCompetitionsController::class, 'destroyCompetition']);
     
 //DELETE HOME
 Route::get('/welcome', [AdminController::class, 'welcome']);
