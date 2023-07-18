@@ -36,6 +36,8 @@ Vue.component('calendar-component', require('./components/competitions/CalendarC
 Vue.component('results-component', require('./components/competitions/ResultsComponent.vue').default);
 Vue.component('Medalists-component', require('./components/competitions/MedalistsComponent.vue').default);
 Vue.component('show-competition-component', require('./components/competitions/ShowCompetitionComponent.vue').default);
+// CONTACTS
+Vue.component('contacts-component', require('./components/ContactsComponent.vue').default);
 // ADMIN
 Vue.component('admin-component', require('./components/AdminComponent.vue').default);
 Vue.component('add-news-component', require('./components/AddNewsComponent.vue').default);

@@ -9,6 +9,7 @@ use App\Http\Controllers\CoachesController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\CompetitionsController;
 use App\Http\Controllers\AdminCompetitionsController;
+use App\Http\Controllers\ContactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::get('/competitions', [CompetitionsController::class, 'index']);
 Route::get('/competitions/{id}', [CompetitionsController::class, 'showCompetition']);
 Route::post('/get-year-competitions', [CompetitionsController::class, 'getYearCompetitions']);
 Route::post('/get-one-competition', [CompetitionsController::class, 'getOneCompetition']);
+// CONTACTS PAGE
+Route::get('/contacts', [ContactsController::class, 'index']);
 
 Auth::routes();
 

@@ -47,17 +47,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="flex flex-col w-full mt-10">
-            <div v-for="tournir in filterCompetitions" class="flex flex-col lg:flex-row items-center mb-8">
-                <p class="tournir-date text-blue-500 w-full lg:w-1/12 px-5 lg:pl-0 lg:text-right lg:justify-end">{{ tournir.date_start | moment('DD.MM') }} <span v-if="tournir.date_end" class="mx-1">-</span> {{ tournir.date_end | moment('DD.MM') }}</p>
-                <div class="calendar-card bg-white shadow-xl w-full sm:w-10/12 p-5 rounded-lg flex flex-col lg:flex-row items-center justify-between">
-                    <h6 class="lg:w-[40%] text-center lg:text-left mb-4 lg:mb-0 text-lg">{{ tournir.title }}</h6>
-                    <p class="flex text-gray-600 lg:w-[20%] text-center justify-center mb-4 lg:mb-0">{{ tournir.location }}</p>
-                    <p class="flex text-gray-600 lg:w-[20%] text-center lg:text-left mb-4 lg:mb-0">{{ tournir.category }}</p>
-                    <a :href="'/competitions/'+tournir.id" class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</a>
-                </div>
-            </div>
-        </div> -->
     </div>
 </template>
 
