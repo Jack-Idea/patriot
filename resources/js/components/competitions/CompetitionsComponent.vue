@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <div class="nav-wrap fixed left-0 top-24 flex">
+        <div class="nav-wrap fixed left-0 top-24 flex z-50">
             <div class="flex flex-col bg-[var(--accent-color)] pl-10 pr-16 py-5 pt-[19px] items-start rounded-br-lg relative">
                 <span id="marker" class="nav-btn-marker"></span>
                 <button @click.prevent="selectCat(1)" id="navBtn1" :class="{ 'active': selectedCat === 1 }" class="nav-btn text-white mb-7">Календарь</button>
@@ -14,6 +14,7 @@
             </div>
         </div>
         <calendar-component v-if="selectedCat === 1"></calendar-component>
+        <medalists-component v-if="selectedCat === 2"></medalists-component>
     </div>
 </template>
 
@@ -51,11 +52,12 @@
         data() {
             return {
                 menu: true,
-                selectedCat: 1
+                selectedCat: 2
             }
         },
         mounted() {
             this.checkWidth()
+            this.selectCat(this.selectedCat)
         },
         methods: {
             checkWidth() {

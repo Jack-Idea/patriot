@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Competition;
+use App\Models\Medalist;
 
 class AdminCompetitionsController extends Controller
 {
@@ -18,16 +19,6 @@ class AdminCompetitionsController extends Controller
     }
 
     public function storeCompetition(Request $request) {
-        // $title = "Всероссийские соревнования по дзюдо «Детская Лига «Триумф Energy» (суперфинал)";
-        // $location = "Россия, Сочи";
-        // $category = "юноши и девушки до 15 лет (2009-2010 г.р.)";
-        // $date_start = "2023-07-05";
-        // $date_end = "2023-07-06";
-        // $regulations_link = "https://sport-nvrsk.ru";
-        // $legal_link = "https://google.com";
-        // $report_link = "https://jack-test.ru";
-
-
         $title = request('title');
         $location = request('location');
         $category = request('category');
@@ -50,7 +41,7 @@ class AdminCompetitionsController extends Controller
             'legal_link' => $legal_link
         ]);
 
-        $msg_status = 'Соревнования добавлены!';
+        $msg_status = 'Соревнования добавлены';
 
         return compact('msg_status');
     }
@@ -86,5 +77,55 @@ class AdminCompetitionsController extends Controller
         $competition->delete();
         $msg_status = 'Соревнование удалено';
         return compact('msg_status', 'competition');
+    }
+
+    //GET MEDALISTS
+    public function getAdminMedalists() {
+        $medalists = Medalist::orderBy('updated_at', 'desc')->get();
+        return compact('medalists');
+    }
+
+    //ADD MEDALIST
+    public function addMedalist(Request $request) {
+        Medalist::create([
+            'full_name' => request('full_name'),
+            'birthday' => request('birthday'),
+            'weight' => request('weight'),
+        ]);
+        $msg_status = 'Медалист добавлен';
+        return compact('msg_status');
+    }
+    //EDIT MEDALIST
+    public function editMedalist(Request $request) {
+        $medalist_request = request('medalist');
+        $total = [];
+        if ($medalist_request["competitions"] !== null) {
+            foreach ($medalist_request["competitions"] as $score) {
+                array_push($total, $score["score"]);
+            }
+            $total = array_sum($total);
+        } else {
+            $total = 0;
+        }
+        $medalist = Medalist::find($medalist_request["id"]);
+        $medalist->full_name =$medalist_request["full_name"];
+        $medalist->birthday = $medalist_request["birthday"];
+        $medalist->weight = $medalist_request["weight"];
+        $medalist->competitions = $medalist_request["competitions"];
+        $medalist->total_score = $total;
+        $medalist->save();
+
+        // $medalist = ["name" => "German", "competitions" => [["place" => "some", "score" => 2, "title" => "someTitle"],["place" => "some", "score" => 1, "title" => "someTitle"],["place" => "some", "score" => 5, "title" => "someTitle"]]];
+        // $medalist = ["name" => "German", "competitions" => null];
+        $msg_status = "Медалист отредактирован";
+        return compact('msg_status');
+    }
+    //DELETE MEDALIST
+    public function deleteMedalist(Request $request) {
+        $id = request("id");
+        $medalist = Medalist::find($id);
+        $medalist->delete();
+        $msg_status = "Медалист удален";
+        return compact('msg_status');
     }
 }

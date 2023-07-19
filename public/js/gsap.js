@@ -41,3 +41,8 @@ function competitionsMenu(flag) {
         gsap.to('.menu-arrow', {rotateZ: -180, duration: 0.3});
     }
 }
+
+function startContacts() {
+    gsap.to('.img-figure', {scaleY: 1, duration: 1, ease: 'power'});
+    gsap.to('.divider', {scaleX: 1, duration: 1, delay: 0.3, ease: 'power'});
+}

@@ -42,6 +42,8 @@ Route::get('/competitions', [CompetitionsController::class, 'index']);
 Route::get('/competitions/{id}', [CompetitionsController::class, 'showCompetition']);
 Route::post('/get-year-competitions', [CompetitionsController::class, 'getYearCompetitions']);
 Route::post('/get-one-competition', [CompetitionsController::class, 'getOneCompetition']);
+// MEDALISTS COMPONENT
+Route::get('/get-medalists', [CompetitionsController::class, 'getMedalists']);
 // CONTACTS PAGE
 Route::get('/contacts', [ContactsController::class, 'index']);
 
@@ -49,13 +51,20 @@ Auth::routes();
 
 // ADMIN
 Route::get('/admin', [AdminController::class, 'index']);
+// ADMIN NEWS
 Route::post('/store-news', [AdminController::class, 'storeNews']);
 Route::post('/store-news-img', [AdminController::class, 'updateImg']);
 Route::post('/store-news-imgs', [AdminController::class, 'updateImgs']);
 Route::post('/destroy-news', [AdminController::class, 'destroyNews']);
+// ADMIN COMPETITIONS
 Route::post('/store-competition', [AdminCompetitionsController::class, 'storeCompetition']);
 Route::post('/edit-competition', [AdminCompetitionsController::class, 'editCompetition']);
 Route::post('/destroy-competition', [AdminCompetitionsController::class, 'destroyCompetition']);
+// ADMIN MEDALISTS
+Route::get('/get-admin-medalists', [AdminCompetitionsController::class, 'getAdminMedalists']);
+Route::post('/add-medalist', [AdminCompetitionsController::class, 'addMedalist']);
+Route::post('/edit-medalist', [AdminCompetitionsController::class, 'editMedalist']);
+Route::post('/destroy-medalist', [AdminCompetitionsController::class, 'deleteMedalist']);
     
 //DELETE HOME
 Route::get('/welcome', [AdminController::class, 'welcome']);

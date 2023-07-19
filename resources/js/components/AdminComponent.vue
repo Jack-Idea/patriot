@@ -4,10 +4,12 @@
             <div class="flex flex-wrap mb-10">
                 <button @click.prevent="category = 'news'" :class="{ active: category === 'news' }" class="main-btn shadow-xl mb-4">Новости</button>
                 <button @click.prevent="category = 'competitions'" :class="{ active: category === 'competitions' }" class="main-btn shadow-xl mb-4 md:ml-4">Соревнования</button>
+                <button @click.prevent="category = 'medalists'" :class="{ active: category === 'medalists' }" class="main-btn shadow-xl mb-4 md:ml-4">Медалисты</button>
             </div>
             <div>
                 <add-news-component v-if="category === 'news'"></add-news-component>
                 <add-competitions-component v-if="category === 'competitions'"></add-competitions-component>
+                <add-medalists-component v-if="category === 'medalists'"></add-medalists-component>
             </div>
         </div>
     </section> 
@@ -23,7 +25,7 @@
     export default {
         data() {
             return {
-                category: "competitions"
+                category: "medalists"
             }
         },
         mounted() {

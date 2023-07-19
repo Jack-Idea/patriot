@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Competition;
+use App\Models\Medalist;
 use Illuminate\Support\Carbon;
 
 class CompetitionsController extends Controller
@@ -34,5 +35,11 @@ class CompetitionsController extends Controller
     public function getOneCompetition(Request $request) {
         $competition = Competition::find(request('id'));
         return compact('competition');
+    }
+
+    //GET MEDALISTS
+    public function getMedalists() {
+        $medalists = Medalist::orderBy("total_score", "desc")->get();
+        return compact("medalists");
     }
 }
