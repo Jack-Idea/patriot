@@ -158,8 +158,14 @@ header nav>a.active:after {
     font-size: calc(var(--index)*1.5);
     text-transform: uppercase;
 }
-#org {
-    transition: all .3s ease-in-out;
+.org-1, .org-2, .org-3, .org-4 {
+    /* transition: all .3s ease-in-out; */
+    /* transition: all 1s ease-in-out; */
+    transform: perspective(500px) translate3d(0, 100%, -150px) rotateX(-20deg);
+    opacity: 0;
+}
+.org-0 {
+    transform: perspective(500px) translate3d(0, 0, 0);
 }
 .main-org-phone-wrap {
     height: calc(var(--index)*3.3);

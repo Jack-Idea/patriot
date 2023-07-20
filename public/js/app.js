@@ -6451,11 +6451,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       selectedSection: 0,
+      prevSelectedSection: 0,
       scrollActive: true,
       selectedOrg: {
         "id": 1,
@@ -6472,7 +6474,7 @@ __webpack_require__.r(__webpack_exports__);
         "id": 1,
         "title": "Новороссийская городская общественная организация Спортивный клуб «Патриот» имени Андрея Владимировича Фомина",
         "shortTitle": "Спортивный клуб «Патриот»",
-        "img": "patriot2.jpg",
+        "img": "10.jpg",
         "logo": "logo",
         "class": "patriot",
         "tel": 79184880722,
@@ -6521,7 +6523,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.mainHeight();
-    this.titlePosition();
+    // this.titlePosition()
     setTimeout(function () {
       // start()
     }, 1000);
@@ -6543,12 +6545,14 @@ __webpack_require__.r(__webpack_exports__);
         if (!index) {
           index = 0;
         }
+        mainPage(index, this.selectedSection);
         orgs.forEach(function (item) {
-          item.style.opacity = 0;
-          item.style.transform = 'skew(-50deg, 0)';
+          // item.style.opacity = 0
+          // item.style.transform = 'skew(-50deg, 0)'
         });
-        orgs[index].style.opacity = 1;
-        orgs[index].style.transform = 'skew(0, 0)';
+        this.prevSelectedSection = index;
+        // orgs[index].style.opacity = 1
+        // orgs[index].style.transform = 'skew(0, 0)'
       }
     },
     selectOrg: function selectOrg(index) {
@@ -6578,7 +6582,7 @@ __webpack_require__.r(__webpack_exports__);
         line.style = 'background: var(--accent-color);';
       }
       if (self.selectedOrg["class"] === 'struggle') {
-        btn.style = 'background: #2d2d2d; color: white;';
+        btn.style = 'background: white; color: #2d2d2d;';
         phone.style = 'background: #2d2d2d; color: #ffffff;';
         line.style = 'background: #fff;';
       }
@@ -7696,7 +7700,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       menu: true,
-      selectedCat: 2
+      selectedCat: 1
     };
   },
   mounted: function mounted() {
@@ -13861,7 +13865,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-3ee370e9], section[data-v-3ee370e9] {\n    background: var(--bg-color) !important;\n    max-height: 1080px !important;\n    font-family: 'Oswald', sans-serif;\n}\n.container[data-v-3ee370e9] {\n    max-width: 1920px;\n}\n.bg-img[data-v-3ee370e9] {\n    /* filter: grayscale(50%); */\n}\n.main-title[data-v-3ee370e9] {\n    font-size: calc(var(--index)*1);\n    display: flex;\n    align-items: center;\n    background: var(--bg-color);\n}\n.org-btn[data-v-3ee370e9] {\n    border-bottom: 1px solid #d9d9d9;\n    cursor: pointer;\n    padding: 16px;\n    font-size: calc(var(--index)*0.65);\n    width: calc(var(--index)*7.2);\n    height: calc(var(--index)*4.6);\n}\n.org-btn[data-v-3ee370e9]:first-child {\n    background: #2d2d2d;\n    color: #fff;\n    border-top-right-radius: 8px;\n    border-top-left-radius: 8px;\n}\n.org-btn[data-v-3ee370e9]:last-child {\n    border-bottom-right-radius: 8px;\n    border-bottom-left-radius: 8px;\n}\n.logo[data-v-3ee370e9] {\n    width: calc(var(--index)*5);\n    transform: scale(1);\n}\n.main-org-phone[data-v-3ee370e9]:hover {\n    text-decoration: none;\n    color: #2d2d2d;\n}\n.main-phone-icon[data-v-3ee370e9] {\n    background: var(--accent-color);\n    color: #fff;\n    border-radius: 50%;\n    width: 40px;\n    height: 40px;\n    padding: 8px;\n}\n#colorLine[data-v-3ee370e9] {\n    background: var(--accent-color);\n    opacity: 0.4;\n    transition: all .3s ease-in-out;\n}\n.btn-to-site[data-v-3ee370e9] {\n    width: 220px;\n    height: 45px;\n    justify-content: center;\n    align-items: center;\n    text-transform: uppercase;\n    border-radius: 4px;\n    font-size: 17px;\n    transition: all .3s ease-in-out;\n    background: var(--accent-color);\n}\n.btn-to-site[data-v-3ee370e9]:hover {\n    color: #2d2d2d;\n    text-decoration: none;\n}\n.btn-to-site__icon[data-v-3ee370e9] {\n    width: 28px;\n}\n@media screen and (min-width: 1920px) {\nbody[data-v-3ee370e9] {\n        font-size: 20px !important;\n}\nh1[data-v-3ee370e9], h2[data-v-3ee370e9], h3[data-v-3ee370e9], h4[data-v-3ee370e9], h5[data-v-3ee370e9], h6[data-v-3ee370e9] {\n        font-size: 50px !important;\n}\n.logo[data-v-3ee370e9] {\n        width: 144px;\n}\n.main-title[data-v-3ee370e9] {\n        font-size: 30px !important;\n}\n.main-org-phone[data-v-3ee370e9] {\n        font-size: 23px;\n}\n.org-btn[data-v-3ee370e9] {\n        max-width: 232px;\n        max-height: 147px;\n        font-size: 19px;\n}\n}\n@media screen and (max-width: 1024px) {\n#colorLine[data-v-3ee370e9] {\n        width: calc(var(--index)*9.3);\n}\n.main-title[data-v-3ee370e9] {\n        background: rgba(242, 248, 252, .85);\n}\n.org-btn[data-v-3ee370e9] {\n        padding: 8px 16px;\n        border-right: 1px solid #d9d9d9;\n        font-size: calc(var(--index)*1.1);\n        width: calc((100vw - 12%) / 3);\n        height: auto;\n}\n.org-btn[data-v-3ee370e9]:first-child {\n        border-top-right-radius: 0;\n}\n.org-btn[data-v-3ee370e9]:nth-last-child(3) {\n        border-top-right-radius: 8px;\n        border-right: none;\n}\n.org-btn[data-v-3ee370e9]:nth-last-child(2) {\n        border-bottom-left-radius: 8px;\n        width: calc((100vw - 12%) / 2);\n        border-bottom: none;\n}\n.org-btn[data-v-3ee370e9]:last-child {\n        border-bottom-left-radius: 0;\n        width: calc((100vw - 12%) / 2);\n        border-bottom: none;\n        border-right: none;\n}\n}\n@media screen and (max-width: 768px) {\n.logo[data-v-3ee370e9] {\n        width: calc(var(--index)*8);\n}\n.btn-to-site[data-v-3ee370e9] {\n        font-size: calc(var(--index)*1);\n}\n.main-title[data-v-3ee370e9] {\n        font-size: calc(var(--index)*1.3);\n}\n.main-org-phone-wrap[data-v-3ee370e9] {\n        height: calc(var(--index)*5);\n}\n.main-org-phone[data-v-3ee370e9] {\n        font-size: calc(var(--index)*1.5);\n}\n.main-phone-icon[data-v-3ee370e9] {\n        width: calc(var(--index)*2.3);\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-3ee370e9], section[data-v-3ee370e9] {\n    background: var(--bg-color) !important;\n    max-height: 1080px !important;\n    font-family: 'Oswald', sans-serif;\n}\n.container[data-v-3ee370e9] {\n    max-width: 1920px;\n}\n.bg-img[data-v-3ee370e9] {\n    /* filter: grayscale(50%); */\n}\n.main-title[data-v-3ee370e9] {\n    font-size: calc(var(--index)*1);\n    display: flex;\n    align-items: center;\n    background: var(--bg-color);\n}\n.org-btn[data-v-3ee370e9] {\n    border-bottom: 1px solid #d9d9d9;\n    cursor: pointer;\n    padding: 16px;\n    font-size: calc(var(--index)*0.65);\n    width: calc(var(--index)*7.2);\n    height: calc(var(--index)*4.6);\n}\n.org-btn[data-v-3ee370e9]:first-child {\n    background: #2d2d2d;\n    color: #fff;\n    border-top-right-radius: 8px;\n    border-top-left-radius: 8px;\n}\n.org-btn[data-v-3ee370e9]:last-child {\n    border-bottom-right-radius: 8px;\n    border-bottom-left-radius: 8px;\n}\n.logo[data-v-3ee370e9] {\n    width: calc(var(--index)*5);\n    transform: scale(1);\n}\n.main-org-phone[data-v-3ee370e9]:hover {\n    text-decoration: none;\n    color: #2d2d2d;\n}\n.main-phone-icon[data-v-3ee370e9] {\n    background: var(--accent-color);\n    color: #fff;\n    border-radius: 50%;\n    width: 40px;\n    height: 40px;\n    padding: 8px;\n}\n#colorLine[data-v-3ee370e9] {\n    background: var(--accent-color);\n    opacity: 0.4;\n    transition: all .3s ease-in-out;\n}\n.btn-to-site[data-v-3ee370e9] {\n    width: 220px;\n    height: 45px;\n    justify-content: center;\n    align-items: center;\n    text-transform: uppercase;\n    border-radius: 8px;\n    font-size: 17px;\n    transition: all .3s ease-in-out;\n    background: var(--accent-color);\n}\n.btn-to-site[data-v-3ee370e9]:hover {\n    /* color: #2d2d2d; */\n    color: #fff;\n    text-decoration: none;\n}\n.btn-to-site__icon[data-v-3ee370e9] {\n    width: 28px;\n}\n@media screen and (min-width: 1920px) {\nbody[data-v-3ee370e9] {\n        font-size: 20px !important;\n}\nh1[data-v-3ee370e9], h2[data-v-3ee370e9], h3[data-v-3ee370e9], h4[data-v-3ee370e9], h5[data-v-3ee370e9], h6[data-v-3ee370e9] {\n        font-size: 50px !important;\n}\n.logo[data-v-3ee370e9] {\n        width: 144px;\n}\n.main-title[data-v-3ee370e9] {\n        font-size: 30px !important;\n}\n.main-org-phone[data-v-3ee370e9] {\n        font-size: 23px;\n}\n.org-btn[data-v-3ee370e9] {\n        max-width: 232px;\n        max-height: 147px;\n        font-size: 19px;\n}\n}\n@media screen and (max-width: 1024px) {\n#colorLine[data-v-3ee370e9] {\n        width: calc(var(--index)*9.3);\n}\n.main-title[data-v-3ee370e9] {\n        background: rgba(242, 248, 252, .85);\n}\n.org-btn[data-v-3ee370e9] {\n        padding: 8px 16px;\n        border-right: 1px solid #d9d9d9;\n        font-size: calc(var(--index)*1.1);\n        width: calc((100vw - 12%) / 3);\n        height: auto;\n}\n.org-btn[data-v-3ee370e9]:first-child {\n        border-top-right-radius: 0;\n}\n.org-btn[data-v-3ee370e9]:nth-last-child(3) {\n        border-top-right-radius: 8px;\n        border-right: none;\n}\n.org-btn[data-v-3ee370e9]:nth-last-child(2) {\n        border-bottom-left-radius: 8px;\n        width: calc((100vw - 12%) / 2);\n        border-bottom: none;\n}\n.org-btn[data-v-3ee370e9]:last-child {\n        border-bottom-left-radius: 0;\n        width: calc((100vw - 12%) / 2);\n        border-bottom: none;\n        border-right: none;\n}\n}\n@media screen and (max-width: 768px) {\n.logo[data-v-3ee370e9] {\n        width: calc(var(--index)*8);\n}\n.btn-to-site[data-v-3ee370e9] {\n        font-size: calc(var(--index)*1);\n}\n.main-title[data-v-3ee370e9] {\n        font-size: calc(var(--index)*1.3);\n}\n.main-org-phone-wrap[data-v-3ee370e9] {\n        height: calc(var(--index)*5);\n}\n.main-org-phone[data-v-3ee370e9] {\n        font-size: calc(var(--index)*1.5);\n}\n.main-phone-icon[data-v-3ee370e9] {\n        /* width: calc(var(--index)*2.3); */\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -56897,7 +56901,10 @@ var staticRenderFns = [
             _vm._v(" "),
             _c(
               "a",
-              { staticClass: "header-link mr-8 font-light hover:text-white" },
+              {
+                staticClass: "header-link mr-8 font-light hover:text-white",
+                attrs: { href: "/gallery" },
+              },
               [_vm._v("Галерея")]
             ),
             _vm._v(" "),
@@ -57788,22 +57795,23 @@ var render = function () {
             "container absolute flex justify-center items-center w-full h-full",
         },
         [
-          _vm._l(_vm.organizations, function (org) {
+          _vm._l(_vm.organizations, function (org, index) {
             return _c(
               "div",
               {
                 staticClass:
-                  "container bg-img flex justify-center items-center w-full lg:w-10/12 h-[40%] lg:h-[80%] lg:bottom-[5%] lg:left-[5%] top-32 lg:top-auto absolute lg:rounded-lg",
+                  "container bg-img flex justify-center items-center w-full lg:w-10/12 h-[40%] lg:h-[80%] lg:bottom-[5%] lg:left-[5%] lg:top-auto absolute lg:rounded-lg",
+                class: "org-" + index,
                 style:
                   "background: url(img/" +
                   org.img +
-                  ") no-repeat center bottom / cover",
+                  ") no-repeat center top / cover",
                 attrs: { id: "org" },
               },
               [
                 _c("div", {
                   staticClass:
-                    "absolute top-0 left-0 lg:bg-black flex w-full h-full lg:bg-opacity-40 lg:rounded-lg",
+                    "absolute top-0 left-0 lg:bg-black flex w-full h-full lg:bg-opacity-20 lg:rounded-lg",
                 }),
               ]
             )
@@ -57840,28 +57848,10 @@ var render = function () {
                   ),
                   _vm._v(" "),
                   _c(
-                    "p",
-                    {
-                      staticClass:
-                        "flex mt-auto lg:mt-5 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start w-[220px]",
-                    },
-                    [_vm._v("Каждый месяц у нас занимается более 1000 человек")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass:
-                        "mt-2 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start",
-                    },
-                    [_vm._v("Занятия с 5-ти лет")]
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "a",
                     {
                       staticClass:
-                        "btn-to-site flex items-center mt-7 lg:ml-[5%]",
+                        "btn-to-site flex items-center shadow-lg mt-7 lg:ml-[5%]",
                       attrs: { href: _vm.selectedOrg.link, id: "mainBtn" },
                     },
                     [
@@ -57909,7 +57899,7 @@ var render = function () {
         "div",
         {
           staticClass:
-            "flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] lg:bottom-[10%] rounded-lg shadow-lg mt-36 lg:mt-0",
+            "flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] lg:bottom-[10%] rounded-lg shadow-lg mt-36 mt-[400px] lg:mt-0",
         },
         _vm._l(_vm.organizations, function (org, index) {
           return _c(
@@ -58062,7 +58052,7 @@ var render = function () {
         "div",
         {
           staticClass:
-            "news-card bg-white flex flex-col w-full min-h-[350px] shadow-[1px_4px_10px_rgba(0,0,0,0.2)] rounded-xl relative overflow-hidden",
+            "news-card bg-white flex flex-col w-full min-h-[350px] shadow-lg rounded-xl relative overflow-hidden",
         },
         [
           _c(
@@ -59927,9 +59917,27 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _vm.selectedCat === 1 ? _c("calendar-component") : _vm._e(),
+      _c("calendar-component", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.selectedCat === 1,
+            expression: "selectedCat === 1",
+          },
+        ],
+      }),
       _vm._v(" "),
-      _vm.selectedCat === 2 ? _c("medalists-component") : _vm._e(),
+      _c("medalists-component", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.selectedCat === 2,
+            expression: "selectedCat === 2",
+          },
+        ],
+      }),
     ],
     1
   )

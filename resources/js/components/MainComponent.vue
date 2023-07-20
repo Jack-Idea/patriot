@@ -1,8 +1,8 @@
 <template>
     <section class="relative flex items-center justify-center h-screen overflow-hidden">      
         <div class="container absolute flex justify-center items-center w-full h-full">
-            <div id="org" v-for="org in organizations" class="container bg-img flex justify-center items-center w-full lg:w-10/12 h-[40%] lg:h-[80%] lg:bottom-[5%] lg:left-[5%] top-32 lg:top-auto absolute lg:rounded-lg" :style="'background: url(img/'+org.img+') no-repeat center bottom / cover'">
-                <div class="absolute top-0 left-0 lg:bg-black flex w-full h-full lg:bg-opacity-40 lg:rounded-lg"></div>
+            <div id="org" v-for="(org, index) in organizations" :class="'org-'+index" class="container bg-img flex justify-center items-center w-full lg:w-10/12 h-[40%] lg:h-[80%] lg:bottom-[5%] lg:left-[5%] lg:top-auto absolute lg:rounded-lg" :style="'background: url(img/'+org.img+') no-repeat center top / cover'">
+                <div class="absolute top-0 left-0 lg:bg-black flex w-full h-full lg:bg-opacity-20 lg:rounded-lg"></div>
             </div>
             <!-- COLOR LINE -->
             <div id="colorLine" class="flex absolute lg:w-[200px] xl:w-[300px] h-full lg:ml-[30%] left-[3%] lg:left-auto top-0 pointer-events-none z-0"></div>
@@ -10,10 +10,10 @@
             <div class="absolute flex justify-center w-full lg:items-center lg:left-[5%] lg:bottom-[5%] top-32 bottom-0 lg:bottom-auto lg:top-auto">
                 <div class="flex flex-col absolute lg:left-0 top-0 lg:top-auto bottom-[5%] lg:bottom-auto w-10/12 lg:w-2/5 mt-8 items-end lg:items-start">
                     <h2 id="mainTitle" class="text-black uppercase px-[5%] py-[5%] lg:py-[3%] w-full rounded-lg lg:rounded-l-none main-title justify-center lg:justify-start text-center lg:text-start">{{ selectedOrg.title }}</h2>
-                    <p class="flex mt-auto lg:mt-5 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start w-[220px]">Каждый месяц у нас занимается более 1000 человек</p>
-                    <p class="mt-2 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start">Занятия с 5-ти лет</p>
+                    <!-- <p class="flex mt-auto lg:mt-5 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start w-[220px]">Каждый месяц у нас занимается более 1000 человек</p>
+                    <p class="mt-2 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start">Занятия с 5-ти лет</p> -->
                     <!-- BTN TO SITE -->
-                    <a :href="selectedOrg.link" id="mainBtn" class="btn-to-site flex items-center mt-7 lg:ml-[5%]">
+                    <a :href="selectedOrg.link" id="mainBtn" class="btn-to-site flex items-center shadow-lg mt-7 lg:ml-[5%]">
                         Перейти на сайт
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="btn-to-site__icon ml-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
@@ -25,7 +25,7 @@
         <!-- SIDE LINE -->
         <div class="hidden lg:flex absolute w-[1px] h-[80%] bg-[#d9d9d9] right-[5%] bottom-[5%]"></div>
         <!-- MAIN BTNS BLOCK -->
-        <div class="flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] lg:bottom-[10%] rounded-lg shadow-lg mt-36 lg:mt-0">
+        <div class="flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] lg:bottom-[10%] rounded-lg shadow-lg mt-36 mt-[400px] lg:mt-0">
             <div v-for="(org, index) in organizations" @click.prevent="selectOrg(index)" class="org-btn flex justify-center items-center text-center text-black bg-white">{{ org.shortTitle }}</div>
         </div>
         <!-- HEADER -->
@@ -119,13 +119,14 @@
         justify-content: center;
         align-items: center;
         text-transform: uppercase;
-        border-radius: 4px;
+        border-radius: 8px;
         font-size: 17px;
         transition: all .3s ease-in-out;
         background: var(--accent-color);
     }
     .btn-to-site:hover {
-        color: #2d2d2d;
+        /* color: #2d2d2d; */
+        color: #fff;
         text-decoration: none;
     }
     .btn-to-site__icon {
@@ -203,7 +204,7 @@
             font-size: calc(var(--index)*1.5);
         }
         .main-phone-icon {
-            width: calc(var(--index)*2.3);
+            /* width: calc(var(--index)*2.3); */
         }
     }
 </style>
@@ -213,6 +214,7 @@
         data() {
             return {
                 selectedSection: 0,
+                prevSelectedSection: 0,
                 scrollActive: true,
                 selectedOrg: {
                     "id": 1,
@@ -230,7 +232,7 @@
                         "id": 1,
                         "title": "Новороссийская городская общественная организация Спортивный клуб «Патриот» имени Андрея Владимировича Фомина",
                         "shortTitle": "Спортивный клуб «Патриот»",
-                        "img": "patriot2.jpg",
+                        "img": "10.jpg",
                         "logo": "logo",
                         "class": "patriot",
                         "tel": 79184880722,
@@ -284,7 +286,7 @@
         },
         mounted() {
             this.mainHeight()
-            this.titlePosition()
+            // this.titlePosition()
             setTimeout(() => {
                 // start()
             }, 1000)
@@ -307,12 +309,14 @@
                         index = 0
                     }
 
+                    mainPage(index, this.selectedSection)
                     orgs.forEach((item) => {
-                        item.style.opacity = 0
-                        item.style.transform = 'skew(-50deg, 0)'
+                        // item.style.opacity = 0
+                        // item.style.transform = 'skew(-50deg, 0)'
                     })
-                    orgs[index].style.opacity = 1
-                    orgs[index].style.transform = 'skew(0, 0)'
+                    this.prevSelectedSection = index
+                    // orgs[index].style.opacity = 1
+                    // orgs[index].style.transform = 'skew(0, 0)'
                 }
             },
             selectOrg(index) {
@@ -344,7 +348,7 @@
                     line.style = 'background: var(--accent-color);';
                 }
                 if (self.selectedOrg.class === 'struggle') {
-                    btn.style = 'background: #2d2d2d; color: white;';
+                    btn.style = 'background: white; color: #2d2d2d;';
                     phone.style = 'background: #2d2d2d; color: #ffffff;';
                     line.style = 'background: #fff;';
                 }

@@ -44,6 +44,8 @@ Route::post('/get-year-competitions', [CompetitionsController::class, 'getYearCo
 Route::post('/get-one-competition', [CompetitionsController::class, 'getOneCompetition']);
 // MEDALISTS COMPONENT
 Route::get('/get-medalists', [CompetitionsController::class, 'getMedalists']);
+// GALLERY PAGE
+Route::get('/gallery', [LandingController::class, 'galleryPage']);
 // CONTACTS PAGE
 Route::get('/contacts', [ContactsController::class, 'index']);
 

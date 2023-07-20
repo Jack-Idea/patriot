@@ -38,4 +38,9 @@ class LandingController extends Controller
         $result = 'Спасибо за ответ!';
         return compact('result', 'firstname');
     }
+
+    //GET GALLERY
+    public function galleryPage() {
+        return view('gallery.index');
+    }
 }

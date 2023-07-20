@@ -11,6 +11,16 @@ if (screenWidth < 1024) {
     // });
 }
 
+function mainPage(index, prev) {
+    if (index > prev) {
+        gsap.to('.org-'+prev, {opacity: 0, transform: 'perspective(500px) translate3d(0, -120%, -150px)', rotateX: '20deg', duration: 0.5, ease:'power'});
+        gsap.fromTo('.org-'+index, {opacity: 0, transform: 'perspective(500px) translate3d(0, 120%, -150px)', rotateX: '-20deg'}, {opacity: 1, transform: 'perspective(500px) translate3d(0, 0, 0)', rotateX: 0, duration: 0.5, ease:'power'});
+    } else {     
+        gsap.to('.org-'+prev, {opacity: 0, transform: 'perspective(500px) translate3d(0, 120%, -150px)', rotateX: '-20deg', duration: 0.5, ease:'power'});
+        gsap.fromTo('.org-'+index, {opacity: 0, transform: 'perspective(500px) translate3d(0, -120%, -150px)', rotateX: '20deg'}, {opacity: 1, transform: 'perspective(500px) translate3d(0, 0, 0)', rotateX: 0, duration: 0.5, ease:'power'});
+    }
+}
+
 function startLanding() {
     let rightItems = document.querySelectorAll('.right-bar-items');
     let kinds = document.querySelectorAll('.kinds-titles');

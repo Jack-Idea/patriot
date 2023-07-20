@@ -13,8 +13,8 @@
                 </svg>
             </div>
         </div>
-        <calendar-component v-if="selectedCat === 1"></calendar-component>
-        <medalists-component v-if="selectedCat === 2"></medalists-component>
+        <calendar-component v-show="selectedCat === 1"></calendar-component>
+        <medalists-component v-show="selectedCat === 2"></medalists-component>
     </div>
 </template>
 
@@ -52,7 +52,7 @@
         data() {
             return {
                 menu: true,
-                selectedCat: 2
+                selectedCat: 1
             }
         },
         mounted() {
