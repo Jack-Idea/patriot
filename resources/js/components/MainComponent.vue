@@ -1,8 +1,8 @@
 <template>
-    <section class="relative flex items-center justify-center h-screen overflow-hidden">      
+    <section class="relative flex items-center justify-center h-screen overflow-hidden" :style="'height:'+screenHeight+'px;'">      
         <div class="container absolute flex justify-center items-center w-full h-full">
             <div id="org" v-for="(org, index) in organizations" :class="'org-'+index" class="container bg-img flex justify-center items-center w-full lg:w-10/12 h-[40%] lg:h-[80%] lg:bottom-[5%] lg:left-[5%] lg:top-auto absolute lg:rounded-lg" :style="'background: url(img/'+org.img+') no-repeat center top / cover'">
-                <div class="absolute top-0 left-0 lg:bg-black flex w-full h-full lg:bg-opacity-20 lg:rounded-lg"></div>
+                <div class="absolute top-0 left-0 bg-black flex w-full h-full bg-opacity-40 lg:rounded-lg"></div>
             </div>
             <!-- COLOR LINE -->
             <div id="colorLine" class="flex absolute lg:w-[200px] xl:w-[300px] h-full lg:ml-[30%] left-[3%] lg:left-auto top-0 pointer-events-none z-0"></div>
@@ -25,7 +25,7 @@
         <!-- SIDE LINE -->
         <div class="hidden lg:flex absolute w-[1px] h-[80%] bg-[#d9d9d9] right-[5%] bottom-[5%]"></div>
         <!-- MAIN BTNS BLOCK -->
-        <div class="flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] lg:bottom-[10%] rounded-lg shadow-lg mt-36 mt-[400px] lg:mt-0">
+        <div class="flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] bottom-[10%] rounded-lg shadow-lg lg:mt-0">
             <div v-for="(org, index) in organizations" @click.prevent="selectOrg(index)" class="org-btn flex justify-center items-center text-center text-black bg-white">{{ org.shortTitle }}</div>
         </div>
         <!-- HEADER -->
@@ -213,6 +213,7 @@
     export default {
         data() {
             return {
+                screenHeight: 0,
                 selectedSection: 0,
                 prevSelectedSection: 0,
                 scrollActive: true,
@@ -294,6 +295,7 @@
         methods: {
             mainHeight() {
                 let cHeight = window.innerHeight
+                this.screenHeight = cHeight
                 let body = document.getElementById('body')
                 body.style.overflow = 'hidden'
                 body.style.height = cHeight

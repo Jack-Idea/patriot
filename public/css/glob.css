@@ -127,6 +127,22 @@ header nav>a.active:after {
     transform: scale(1.1);
     transition: all 0.5s ease-in-out;
 }
+.burger> span {
+    display: flex;
+    width: 50px;
+    height: 2px;
+    background: white;
+    border-radius: 8px;
+}
+.burger>span:nth-child(2) {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.uk-offcanvas-bar {
+    background: var(--accent-color);
+    padding-top: 64px;
+    padding-left: 40px;
+}
 #mainBg {
     background: url("../img/10.jpg") no-repeat center top / cover;
 }
@@ -188,5 +204,8 @@ header nav>a.active:after {
 @media screen and (max-width: 768px) {
     #mainBg {
         background: url("../img/mobile-bg.jpg") no-repeat left top / cover;
+    }
+    header nav>a {
+        font-size: 20px;
     }
 }

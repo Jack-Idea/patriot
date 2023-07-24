@@ -5899,6 +5899,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -6456,6 +6479,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      screenHeight: 0,
       selectedSection: 0,
       prevSelectedSection: 0,
       scrollActive: true,
@@ -6531,6 +6555,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     mainHeight: function mainHeight() {
       var cHeight = window.innerHeight;
+      this.screenHeight = cHeight;
       var body = document.getElementById('body');
       body.style.overflow = 'hidden';
       body.style.height = cHeight;
@@ -6683,6 +6708,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -13889,7 +13916,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.news-card[data-v-6929860f] {\n    font-family: 'Oswald', sans-serif;\n}\n.news-card__img[data-v-6929860f] {\n    filter: sepia(30%);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.news-card[data-v-6929860f] {\n    font-family: 'Oswald', sans-serif;\n    border-radius: 8px !important; \n    overflow: hidden !important;\n}\n.news-card__img[data-v-6929860f] {\n    filter: sepia(30%);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -56737,7 +56764,7 @@ var render = function () {
             "div",
             {
               staticClass:
-                "flex flex-col lg:flex-row w-full justify-between items-end",
+                "flex flex-col lg:flex-row w-full justify-between items-center lg:items-end mt-10",
             },
             [
               _c(
@@ -56746,11 +56773,17 @@ var render = function () {
                 [_vm._v("Политика конфиденциальности")]
               ),
               _vm._v(" "),
-              _c("span", { staticClass: "flex items-center mt-3 font-light" }, [
-                _c("span", [_vm._v(_vm._s(_vm.todayYear))]),
-                _c("span", { staticClass: "mx-2 text-lg" }, [_vm._v("©")]),
-                _c("span", [_vm._v("Все права защищены.")]),
-              ]),
+              _c(
+                "span",
+                {
+                  staticClass: "flex items-center mb-3 mt-3 lg:mb-0 font-light",
+                },
+                [
+                  _c("span", [_vm._v(_vm._s(_vm.todayYear))]),
+                  _c("span", { staticClass: "mx-2 text-lg" }, [_vm._v("©")]),
+                  _c("span", [_vm._v("Все права защищены.")]),
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "a",
@@ -56783,7 +56816,7 @@ var staticRenderFns = [
         },
         [
           _c("img", {
-            staticClass: "logo w-40 scale-100",
+            staticClass: "logo lg:w-40 scale-100",
             attrs: { src: "/img/logo.png", alt: "" },
           }),
         ]
@@ -56796,7 +56829,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex w-full mt-20" }, [
+    return _c("div", { staticClass: "flex w-full lg:mt-20 mt-10" }, [
       _c("div", { staticClass: "w-1/3" }),
       _vm._v(" "),
       _c("div", { staticClass: "w-1/3 h-48 flex justify-center" }, [
@@ -56855,7 +56888,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass:
-          "container mx-auto flex flex-wrap px-[5%] py-3 flex-col md:flex-row items-center",
+          "container mx-auto flex flex-wrap px-[5%] py-3 items-center justify-between",
       },
       [
         _c("a", { attrs: { href: "/patriot" } }, [
@@ -56931,6 +56964,107 @@ var staticRenderFns = [
               },
               [_vm._v("Организации")]
             ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "burger lg:hidden",
+            attrs: { "uk-toggle": "target: #offcanvas-flip" },
+          },
+          [_c("span"), _vm._v(" "), _c("span"), _vm._v(" "), _c("span")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            attrs: {
+              id: "offcanvas-flip",
+              "uk-offcanvas": "flip: true; overlay: true",
+            },
+          },
+          [
+            _c("div", { staticClass: "uk-offcanvas-bar" }, [
+              _c("button", {
+                staticClass: "uk-offcanvas-close mr-4 mt-4",
+                attrs: { "uk-close": "" },
+              }),
+              _vm._v(" "),
+              _c(
+                "nav",
+                { staticClass: "flex flex-col justify-center lg:hidden" },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "header-link mb-5 font-light hover:text-white",
+                      attrs: { href: "/news" },
+                    },
+                    [_vm._v("Новости")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "header-link mb-5 font-light hover:text-white",
+                      attrs: { href: "/parents" },
+                    },
+                    [_vm._v("Родителям")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "header-link mb-5 font-light hover:text-white",
+                      attrs: { href: "/competitions" },
+                    },
+                    [_vm._v("Соревнования")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "header-link mb-5 font-light hover:text-white",
+                      attrs: { href: "/gallery" },
+                    },
+                    [_vm._v("Галерея")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "header-link mb-5 font-light hover:text-white",
+                    },
+                    [_vm._v("Доска почета")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "header-link mb-5 font-light hover:text-white",
+                      attrs: { href: "/contacts" },
+                    },
+                    [_vm._v("Контакты")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "header-link hover:text-white font-light",
+                      attrs: { href: "/" },
+                    },
+                    [_vm._v("Организации")]
+                  ),
+                ]
+              ),
+            ]),
           ]
         ),
       ]
@@ -57091,7 +57225,8 @@ var render = function () {
                 "a",
                 {
                   staticClass:
-                    "flex flex-col w-1/2 bg-[var(--accent-color)] justify-center items-center",
+                    "flex flex-col w-1/2 bg-[var(--accent-color)] justify-center items-center hover:text-white",
+                  attrs: { href: "tel:+79184880722" },
                 },
                 [
                   _c(
@@ -57340,7 +57475,7 @@ var render = function () {
         [
           _c("img", {
             staticClass:
-              "absolute top-[10%] lg:top-[5%] left-[-80%] lg:left-0 z-[-1] opacity-30 rotate-90 lg:rotate-0 w-full",
+              "absolute top-[5%] left-[-25%] lg:left-0 z-[-1] opacity-30 lg:rotate-0 w-[150%] lg:w-full",
             staticStyle: { "pointer-events": "none" },
             attrs: { src: "/img/logo-bg.svg", alt: "" },
           }),
@@ -57786,6 +57921,7 @@ var render = function () {
     {
       staticClass:
         "relative flex items-center justify-center h-screen overflow-hidden",
+      style: "height:" + _vm.screenHeight + "px;",
     },
     [
       _c(
@@ -57811,7 +57947,7 @@ var render = function () {
               [
                 _c("div", {
                   staticClass:
-                    "absolute top-0 left-0 lg:bg-black flex w-full h-full lg:bg-opacity-20 lg:rounded-lg",
+                    "absolute top-0 left-0 bg-black flex w-full h-full bg-opacity-40 lg:rounded-lg",
                 }),
               ]
             )
@@ -57899,7 +58035,7 @@ var render = function () {
         "div",
         {
           staticClass:
-            "flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] lg:bottom-[10%] rounded-lg shadow-lg mt-36 mt-[400px] lg:mt-0",
+            "flex flex-wrap lg:flex-col absolute left-[5%] lg:left-auto right-[5%] lg:right-[7%] bottom-[10%] rounded-lg shadow-lg lg:mt-0",
         },
         _vm._l(_vm.organizations, function (org, index) {
           return _c(
@@ -58052,16 +58188,16 @@ var render = function () {
         "div",
         {
           staticClass:
-            "news-card bg-white flex flex-col w-full min-h-[350px] shadow-lg rounded-xl relative overflow-hidden",
+            "news-card bg-white flex flex-col w-full min-h-[350px] shadow-lg relative",
         },
         [
           _c(
             "div",
             {
               staticClass:
-                "news-card__img flex w-full h-[80%] overflow-hidden relative",
+                "news-card__img flex w-full h-[80%] min-h-[280px] overflow-hidden relative rounded-t-lg",
               style:
-                "background: url('img/uploads/news/" +
+                "background: url('/img/uploads/news/" +
                 item.img +
                 "') no-repeat center center / cover;",
             },
@@ -58070,12 +58206,16 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "absolute bottom-0 flex w-full rounded-t-xl overflow-hidden",
+                    "absolute bottom-0 flex w-full rounded-t-lg overflow-hidden",
+                  staticStyle: {
+                    "border-top-left-radius": "8px",
+                    "border-top-right-radius": "8px",
+                  },
                 },
                 [
                   _c("div", {
                     staticClass:
-                      "bg-white bg-opacity-70 flex w-full absolute h-full left-0",
+                      "bg-white bg-opacity-70 flex w-full absolute h-full left-0 rounded-t-lg",
                     staticStyle: { "backdrop-filter": "blur(4px)" },
                   }),
                   _vm._v(" "),
@@ -58095,7 +58235,7 @@ var render = function () {
             "div",
             {
               staticClass:
-                "flex justify-between items-center text-[#2d2d2d] px-5 h-[20%] font-light",
+                "flex justify-between items-center text-[#2d2d2d] px-5 h-[20%] min-h-[70px] font-light",
             },
             [
               _c(

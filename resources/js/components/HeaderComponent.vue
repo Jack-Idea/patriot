@@ -1,6 +1,6 @@
 <template>
     <header id="header" v-show="header" class="text-white body-font h-[70px]" uk-sticky>
-        <div class="container mx-auto flex flex-wrap px-[5%] py-3 flex-col md:flex-row items-center">
+        <div class="container mx-auto flex flex-wrap px-[5%] py-3 items-center justify-between">
             <a href="/patriot">
                 <img src="/img/logo.png" class="logo" alt="">
             </a>
@@ -13,6 +13,29 @@
                 <a href="/contacts" class="header-link mr-8 font-light hover:text-white">Контакты</a>
                 <a href="/" class="header-link hover:text-white font-light">Организации</a>
             </nav>
+            <button class="burger lg:hidden" uk-toggle="target: #offcanvas-flip">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                <div class="uk-offcanvas-bar">
+
+                    <button class="uk-offcanvas-close mr-4 mt-4" uk-close></button>
+
+                    <nav class="flex flex-col justify-center lg:hidden">
+                        <a href="/news" class="header-link mb-5 font-light hover:text-white">Новости</a>
+                        <a href="/parents" class="header-link mb-5 font-light hover:text-white">Родителям</a>
+                        <a href="/competitions" class="header-link mb-5 font-light hover:text-white">Соревнования</a>
+                        <a href="/gallery" class="header-link mb-5 font-light hover:text-white">Галерея</a>
+                        <a class="header-link mb-5 font-light hover:text-white">Доска почета</a>
+                        <a href="/contacts" class="header-link mb-5 font-light hover:text-white">Контакты</a>
+                        <a href="/" class="header-link hover:text-white font-light">Организации</a>
+                    </nav>
+
+                </div>
+            </div>
         </div>
     </header>
 </template>
