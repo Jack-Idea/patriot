@@ -162,7 +162,7 @@
             </div>
         </div>
         <!-- NEWS -->
-        <div class="container min-h-screen py-20 lg:mt-[75px]">
+        <div class="container py-20 lg:mt-[75px]">
             <h3 class="uppercase font-medium text-3xl text-[var(--accent-color)] text-center lg:text-left">Последние новости</h3>
             <news-component :quantity="8"></news-component>
             <div class="row flex justify-center w-full mt-16">
@@ -170,6 +170,11 @@
                     Все новости
                 </a>
             </div>
+        </div>
+        <!-- PARTNERS -->
+        <div class="container pb-20">
+            <h3 class="uppercase font-medium text-3xl text-[var(--accent-color)] text-center lg:text-left">Наши партнеры</h3>
+            <partners-component></partners-component>
         </div>
     </section>
 </template>

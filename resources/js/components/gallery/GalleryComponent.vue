@@ -1,11 +1,16 @@
 <template>
-    <div class="">
+    <div class="">  
         <div class="flex flex-wrap">
             <button v-for="btn in menu" @click.prevent="selectCat(btn.id)" :id="'menu-'+btn.id" class="menu-btn main-btn mb-4 mr-4">{{ btn.title }}</button>
         </div>
-        <parents-sections-component v-show="selectedMenu === 1"></parents-sections-component>
-        <coaches-component v-show="selectedMenu === 2"></coaches-component>
-        <parents-enrollment-component v-show="selectedMenu === 3"></parents-enrollment-component>
+        <div v-show="selectedMenu === 2">
+            <h5 class="text-xl mt-5">Приносим свои извинения, раздел находится в разработке</h5>
+            <h5 class="mt-5">Возможно, вам будет интересен наш канал на YouTube</h5>
+            <a href="https://www.youtube.com/channel/UCLKobiWnI9pFW1Ms7QDVj4g" target="_blank" class="main-btn mt-4 bg-red-600" style="min-width: 150px; max-width: 200px;">
+                На канал
+                <span uk-icon="icon: youtube; ratio: 1.5" class="ml-2"></span>
+            </a>
+        </div>
     </div>
 </template>
 
@@ -28,15 +33,11 @@
                 menu: [
                     {
                         "id": 1,
-                        "title": "Спортивные секции"
+                        "title": "Фото"
                     },
                     {
                         "id": 2,
-                        "title": "Тренерский состав"
-                    },
-                    {
-                        "id": 3,
-                        "title": "Документы для зачисления"
+                        "title": "Видео"
                     }
                 ]
             }
@@ -56,6 +57,8 @@
             startPage() {
                 document.getElementById('menu-'+this.selectedMenu).classList.add('active')
             }
+        },
+        watch: {
         }
     }
 </script>

@@ -11,8 +11,9 @@
 
                 </a>
             </div>
-            <img src="img/logo.png" class="flex h-[75%] absolute bottom-[13%] right-0 p-3" style="opacity: 0.3;" alt="">
-            <img :src="'img/coaches/'+coach.img+'.png'" class="h-[110%] flex ml-auto absolute bottom-0 right-5" alt="">
+            <img src="img/logo.png" class="flex h-[75%] absolute bottom-[13%] right-0 p-3" style="opacity: 0.1;" alt="">
+            <img v-if="coach.img" :src="'img/coaches/'+coach.img+'.png'" class="h-[110%] flex ml-auto absolute bottom-0 right-5" alt="">
+            <img v-if="!coach.img" src="img/coaches/unknown.png" class="h-[110%] flex ml-auto absolute bottom-0 right-5 opacity-70" alt="">
             <!-- This is the COACH modal -->
             <div :id="'coach-'+index" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body rounded-lg py-8">
@@ -36,7 +37,9 @@
                     <div class="flex flex-col items-center mt-8">  
                         <h3 class="text-center mb-2 text-lg">{{ coach.lastname }} {{ coach.firstname }} {{ coach.middlename }}</h3>
                         <p class="text-gray-500 text-center my-2">{{ coach.rank }}</p>
-                        <p class="text-gray-500 text-center">{{ coach.jobtitle }}</p>
+                        <p v-if="coach.jobtitle" class="text-gray-500 text-center mb-2">{{ coach.jobtitle }}</p>
+                        <p class="text-[#2d2d2d] text-center mt-6">Адрес проведения тренировок:</p>
+                        <p v-for="adress in coach.adress" class="text-gray-500 text-center mt-2">{{ adress }}</p>
                         <a :href="'tel:'+coach.phone" class="text-center text-[var(--accent-color)] mt-4">{{ coach.phone }}</a>
                     </div>
                 </div>

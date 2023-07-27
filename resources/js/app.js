@@ -26,6 +26,7 @@ Vue.component('landing-component', require('./components/LandingComponent.vue').
 Vue.component('coaches-component', require('./components/CoachesComponent.vue').default);
 Vue.component('news-component', require('./components/NewsComponent.vue').default);
 Vue.component('one-news-component', require('./components/OneNewsComponent.vue').default);
+Vue.component('partners-component', require('./components/PartnersComponent.vue').default);
 // PARENTS
 Vue.component('parents-main-component', require('./components/parents/MainComponent.vue').default);
 Vue.component('parents-sections-component', require('./components/parents/SectionsComponent.vue').default);
@@ -36,6 +37,8 @@ Vue.component('calendar-component', require('./components/competitions/CalendarC
 Vue.component('results-component', require('./components/competitions/ResultsComponent.vue').default);
 Vue.component('medalists-component', require('./components/competitions/MedalistsComponent.vue').default);
 Vue.component('show-competition-component', require('./components/competitions/ShowCompetitionComponent.vue').default);
+// GALLERY
+Vue.component('gallery-component', require('./components/gallery/GalleryComponent.vue').default);
 // CONTACTS
 Vue.component('contacts-component', require('./components/ContactsComponent.vue').default);
 // ADMIN
