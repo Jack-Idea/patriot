@@ -5,11 +5,13 @@
                 <button @click.prevent="category = 'news'" :class="{ active: category === 'news' }" class="main-btn shadow-xl mb-4">Новости</button>
                 <button @click.prevent="category = 'competitions'" :class="{ active: category === 'competitions' }" class="main-btn shadow-xl mb-4 md:ml-4">Соревнования</button>
                 <button @click.prevent="category = 'medalists'" :class="{ active: category === 'medalists' }" class="main-btn shadow-xl mb-4 md:ml-4">Медалисты</button>
+                <button @click.prevent="category = 'honor'" :class="{ active: category === 'honor' }" class="main-btn shadow-xl mb-4 md:ml-4">Почетные</button>
             </div>
             <div>
                 <add-news-component v-if="category === 'news'"></add-news-component>
                 <add-competitions-component v-if="category === 'competitions'"></add-competitions-component>
                 <add-medalists-component v-if="category === 'medalists'"></add-medalists-component>
+                <add-honor-component v-if="category === 'honor'"></add-honor-component>
             </div>
         </div>
     </section> 
@@ -25,7 +27,7 @@
     export default {
         data() {
             return {
-                category: "medalists"
+                category: "honor"
             }
         },
         mounted() {

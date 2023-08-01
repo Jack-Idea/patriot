@@ -38,6 +38,13 @@
             </div>
         </div>
         <div class="mt-10 flex justify-center">
+            <button @click.prevent="federation = !federation" class="flex text-[#2d2d2d] items-center">
+                <span class="">Публиковать в федерацию?</span>
+                <span class="checkbox w-7 h-7 border border-gray-500 rounded-md mx-2" :class="{ active: federation }"></span>
+                <span v-if="!federation">Нет</span><span v-if="federation">Да</span>
+            </button>
+        </div>
+        <div class="mt-10 flex justify-center">
             <button v-if="!preloader" @click.prevent="storeNews" class="main-btn bg-green-600 shadow-xl">Сохранить</button>
             <div v-if="preloader" class="main-btn bg-green-600"><div uk-spinner></div></div>
         </div>
@@ -47,6 +54,12 @@
                 <div v-for="(item, index) in news" class="news-card bg-white flex flex-col w-full min-h-[350px] shadow-[1px_4px_10px_rgba(0,0,0,0.2)] rounded-xl relative overflow-hidden">
                     <span v-if="!preloader" @click.prevent="destroyNews(index, item.id)" class="absolute w-10 h-10 bg-red-600 top-4 left-4 rounded-full z-[100] cursor-pointer flex justify-center items-center">
                         <span uk-icon="icon: trash;"></span>
+                    </span>
+                    <button v-if="!preloader" @click.prevent="changeFederation(item)" class="checkbox absolute w-10 h-10 bg-gray-100 rounded-md top-4 right-4 z-[100]" :class="{ active: item.federation }">
+                        <span v-if="!item.federation" class="text-black">X</span>
+                    </button>
+                    <span v-if="preloader" class="checkbox absolute w-10 h-10 bg-gray-100 rounded-md top-4 right-4 z-[100] flex justify-center items-center">
+                        <div class="text-black flex"><div uk-spinner></div></div>
                     </span>
                     <div class="news-card__img flex w-full h-[80%] overflow-hidden relative" :style="`background: url('img/uploads/news/${item.img}') no-repeat center center / cover;`">
                         <div class="absolute bottom-0 flex w-full rounded-t-xl overflow-hidden">
@@ -81,9 +94,11 @@
         border: 1px solid var(--accent-color);
         outline: none;
     }
-
     .news-card__img, img {
         filter: sepia(30%);
+    }
+    .checkbox.active {
+        background: green;
     }
 </style>
 
@@ -98,7 +113,8 @@
                 img: '',
                 newsPath: '',
                 multipleImgs: false,
-                news: []
+                news: [],
+                federation: false
             }
         },
         mounted() {
@@ -121,6 +137,7 @@
                     .post('/store-news', {
                         'title': self.newsTitle,
                         'description': self.newsDescription,
+                        'federation': self.federation,
                         'img': self.img,
                         'imgs': self.newsPath,
                         'multiple': self.multipleImgs
@@ -131,6 +148,7 @@
                             self.msgStatus = response.data.msg_status
                             self.newsTitle = ''
                             self.newsDescription = ''
+                            self.federation = false,
                             self.img = ''
                             self.newsPath = ''
                             self.multipleImgs = false
@@ -140,6 +158,36 @@
                         setTimeout(() => {
                             self.msgStatus = ''
                         }, 3000)
+                    })
+            },
+            // РЕДАКТИРОВАТЬ НОВОСТЬ (ФЕДЕРАЦИЯ)
+            changeFederation(news) {
+                let self = this
+                self.preloader = true
+                news.federation = !news.federation
+                axios
+                    .post('/update-news', {
+                        'id': news.id,
+                        'federation': news.federation
+                    })
+                    .then(function (response) {
+                        self.msgStatus = response.data.msg_status
+                        setTimeout(() => {
+                            self.preloader = false
+                        }, 1000)
+                        setTimeout(() => {
+                            self.msgStatus = ''
+                        }, 3000)
+                    })
+                    .catch(function (error) {
+                        self.msgStatus = 'Что-то пошло не так, перезагрузите страницу'
+                        setTimeout(() => {
+                            news.federation = !news.federation
+                            self.preloader = false
+                        }, 1000)
+                        setTimeout(() => {
+                            self.msgStatus = ''
+                        }, 5000)
                     })
             },
             // СОХРАНЕНИЕ КАРТИНОК

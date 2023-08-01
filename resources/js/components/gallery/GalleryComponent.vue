@@ -3,6 +3,13 @@
         <div class="flex flex-wrap">
             <button v-for="btn in menu" @click.prevent="selectCat(btn.id)" :id="'menu-'+btn.id" class="menu-btn main-btn mb-4 mr-4">{{ btn.title }}</button>
         </div>
+        <div v-show="selectedMenu === 1">
+            <h5 class="text-xl mt-5">Большое количество фотографий публикуется в нашей группе ВКонтакте</h5>
+            <a href="https://vk.com/patriot_nvr" target="_blank" class="main-btn mt-4 bg-[#447bba]" style="min-width: 150px; max-width: 200px;">
+                в VK
+                <span uk-icon="icon: youtube; ratio: 1.5" class="ml-2"></span>
+            </a>
+        </div>
         <div v-show="selectedMenu === 2">
             <h5 class="text-xl mt-5">Приносим свои извинения, раздел находится в разработке</h5>
             <h5 class="mt-5">Возможно, вам будет интересен наш канал на YouTube</h5>

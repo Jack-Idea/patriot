@@ -32,10 +32,28 @@ class AdminController extends Controller
         News::create([
             'title' => request('title'),
             'description' => request('description'),
+            'federation' => request('federation'),
             'img' => request('img'),
             'imgs' => request('imgs'),
         ]);
         $msg_status = 'Новость успешно сохранена';
+        return compact('msg_status');
+    }
+
+    // UPDATE NEWS
+    public function updateNews(Request $request) {
+        
+        $id = request('id');
+        $federation = request('federation');
+
+        $news = News::find($id);
+        $news->federation = $federation;
+        $news->save();
+        if ($federation) {
+            $msg_status = 'Новость добавлена в федерацию';
+        } else {
+            $msg_status = 'Новость исключена из федерации';
+        }
         return compact('msg_status');
     }
 

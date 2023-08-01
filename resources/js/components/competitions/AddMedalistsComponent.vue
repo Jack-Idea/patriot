@@ -160,58 +160,7 @@
                 fullName: '',
                 birthday: '',
                 weight: '',
-                medalists: [
-                    {
-                        "id": 1,
-                        "full_name": "Самойлов Алексей Александрович",
-                        "birthday": '2000-25-08',
-                        "weight": "45",
-                        "competitions": [
-                            {
-                                "title": "Первенство города",
-                                "score": 3
-                            },
-                            {
-                                "title": "Первенство края",
-                                "score": 2
-                            },
-                            {
-                                "title": "Первенство ЮФО",
-                                "score": 4
-                            },
-                            {
-                                "title": "Первенство России",
-                                "score": 1
-                            }
-                        ],
-                        "total_score": 10
-                    },
-                    {
-                        "id": 1,
-                        "full_name": "Макаренко Герман Артурович",
-                        "birthday": '1988-16-06',
-                        "weight": "74",
-                        "competitions": [
-                            {
-                                "title": "Первенство города",
-                                "score": 1
-                            },
-                            {
-                                "title": "Первенство края",
-                                "score": 2
-                            },
-                            {
-                                "title": "Первенство ЮФО",
-                                "score": 1
-                            },
-                            {
-                                "title": "Первенство России",
-                                "score": 1
-                            }
-                        ],
-                        "total_score": 4
-                    }
-                ],
+                medalists: '',
                 filteredMedalists: '',
                 searchMedalist: '',
                 msgStatus: ''

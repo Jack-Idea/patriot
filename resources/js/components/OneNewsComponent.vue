@@ -8,7 +8,7 @@
                 <img v-if="news" :src="'/img/uploads/news/'+news.img" class="w-full" alt="">
             </div>
             <div class="md:w-[45%]">
-                <p class="text-[#555]">{{ news.description }}</p>
+                <p class="text-[#555] whitespace-pre">{{ news.description }}</p>
             </div>
             <div class="lg:w-[85%] flex flex-wrap gap-4">
                 <div v-if="news" v-for="img in news.imgs" class="multiple-imgs">

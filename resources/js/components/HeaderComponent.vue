@@ -9,7 +9,7 @@
                 <a href="/parents" class="header-link mr-8 font-light hover:text-white">Родителям</a>
                 <a href="/competitions" class="header-link mr-8 font-light hover:text-white">Соревнования</a>
                 <a href="/gallery" class="header-link mr-8 font-light hover:text-white">Галерея</a>
-                <a class="header-link mr-8 font-light hover:text-white">Доска почета</a>
+                <a href="/honor" class="header-link mr-8 font-light hover:text-white">Доска почета</a>
                 <a href="/contacts" class="header-link mr-8 font-light hover:text-white">Контакты</a>
                 <a href="/" class="header-link hover:text-white font-light">Организации</a>
             </nav>
@@ -29,7 +29,7 @@
                         <a href="/parents" class="header-link mb-5 font-light hover:text-white">Родителям</a>
                         <a href="/competitions" class="header-link mb-5 font-light hover:text-white">Соревнования</a>
                         <a href="/gallery" class="header-link mb-5 font-light hover:text-white">Галерея</a>
-                        <a class="header-link mb-5 font-light hover:text-white">Доска почета</a>
+                        <a href="/honor" class="header-link mb-5 font-light hover:text-white">Доска почета</a>
                         <a href="/contacts" class="header-link mb-5 font-light hover:text-white">Контакты</a>
                         <a href="/" class="header-link hover:text-white font-light">Организации</a>
                     </nav>

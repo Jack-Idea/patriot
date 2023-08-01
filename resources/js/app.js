@@ -19,6 +19,8 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 Vue.component('main-component', require('./components/MainComponent.vue').default);
@@ -39,6 +41,8 @@ Vue.component('medalists-component', require('./components/competitions/Medalist
 Vue.component('show-competition-component', require('./components/competitions/ShowCompetitionComponent.vue').default);
 // GALLERY
 Vue.component('gallery-component', require('./components/gallery/GalleryComponent.vue').default);
+// HONOR
+Vue.component('honor-component', require('./components/honor/HonorComponent.vue').default);
 // CONTACTS
 Vue.component('contacts-component', require('./components/ContactsComponent.vue').default);
 // ADMIN
@@ -46,6 +50,7 @@ Vue.component('admin-component', require('./components/AdminComponent.vue').defa
 Vue.component('add-news-component', require('./components/AddNewsComponent.vue').default);
 Vue.component('add-competitions-component', require('./components/competitions/AddCompetitionsComponent.vue').default);
 Vue.component('add-medalists-component', require('./components/competitions/AddMedalistsComponent.vue').default);
+Vue.component('add-honor-component', require('./components/honor/AddHonorComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

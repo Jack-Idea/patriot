@@ -17,6 +17,8 @@ class CreateNewsTable extends Migration
             $table->id();
             $table->text('title')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('club')->default(true);
+            $table->boolean('federation')->default(false);
             $table->string('img')->nullable();
             $table->json('imgs')->nullable();
             $table->timestamps();

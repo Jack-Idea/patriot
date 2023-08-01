@@ -9,6 +9,7 @@ use App\Http\Controllers\CoachesController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\CompetitionsController;
 use App\Http\Controllers\AdminCompetitionsController;
+use App\Http\Controllers\AdminHonorController;
 use App\Http\Controllers\ContactsController;
 
 /*
@@ -46,6 +47,9 @@ Route::post('/get-one-competition', [CompetitionsController::class, 'getOneCompe
 Route::get('/get-medalists', [CompetitionsController::class, 'getMedalists']);
 // GALLERY PAGE
 Route::get('/gallery', [LandingController::class, 'galleryPage']);
+// HONOR PAGE
+Route::get('/honor', [LandingController::class, 'honorPage']);
+Route::get('/get-bests', [LandingController::class, 'getHonor']);
 // CONTACTS PAGE
 Route::get('/contacts', [ContactsController::class, 'index']);
 
@@ -55,6 +59,7 @@ Auth::routes();
 Route::get('/admin', [AdminController::class, 'index']);
 // ADMIN NEWS
 Route::post('/store-news', [AdminController::class, 'storeNews']);
+Route::post('/update-news', [AdminController::class, 'updateNews']);
 Route::post('/store-news-img', [AdminController::class, 'updateImg']);
 Route::post('/store-news-imgs', [AdminController::class, 'updateImgs']);
 Route::post('/destroy-news', [AdminController::class, 'destroyNews']);
@@ -67,6 +72,10 @@ Route::get('/get-admin-medalists', [AdminCompetitionsController::class, 'getAdmi
 Route::post('/add-medalist', [AdminCompetitionsController::class, 'addMedalist']);
 Route::post('/edit-medalist', [AdminCompetitionsController::class, 'editMedalist']);
 Route::post('/destroy-medalist', [AdminCompetitionsController::class, 'deleteMedalist']);
+//ADMIN HONOR
+Route::post('/store-honor', [AdminHonorController::class, 'storeHonor']);
+Route::post('/store-honor-img', [AdminHonorController::class, 'storeHonorImg']);
+Route::post('/destroy-honor', [AdminHonorController::class, 'destroyHonor']);
     
 //DELETE HOME
 Route::get('/welcome', [AdminController::class, 'welcome']);
