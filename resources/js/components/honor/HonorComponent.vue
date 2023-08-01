@@ -10,15 +10,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </div>
-                <div class="ml-4 flex flex-col">
-                    <h5 class="text-[var(--accent-color)] text-lg">{{ best.fullname }}</h5>
-                    <div class="flex text-gray-600 mt-2 mb-6 md:mb-0">
+                <div class="md:ml-4 flex flex-col">
+                    <h5 class="text-[var(--accent-color)] text-lg text-center md:text-start">{{ best.full_name }}</h5>
+                    <div class="flex text-gray-600 mt-2 mb-5 md:mb-0 justify-center md:justify-start">
                         <p>Дата рождения:</p>
                         <p class="ml-2 font-light">{{ best.birthday | moment('DD.MM.YYYY') }}</p>
-                    </div>
-                    <div class="flex text-gray-600 mt-2 mb-6 md:mb-0">
-                        <p>Место в списке:</p>
-                        <p class="ml-2">{{ best.place }}</p>
                     </div>
                     <button class="main-btn mt-auto" :uk-toggle="'target: #best-'+index">
                         Подробнее...

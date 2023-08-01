@@ -45,11 +45,29 @@ class AdminHonorController extends Controller
         return compact('img');
     }
 
+    public function editHonor(Request $request) {
+        $request_best = request('best');
+        $best = Honor::find($request_best['id']);
+        $best->full_name = $request_best['full_name'];
+        $best->birthday = $request_best['birthday'];
+        $best->place = $request_best['place'];
+        $best->achievements = $request_best['achievements'];
+        $best->save();
+        
+        $msg_status = 'Почетный отредактирован';
+        return compact('msg_status');
+    }
+
     public function destroyHonor(Request $request) {
         $id = request('id');
-        // $best = Honor::find($id);
+        $best = Honor::find($id);
+
+        if ($best->img != null) {
+            unlink('img/uploads/honors/'.$best->img);
+        }
+        $best->delete();
+
         $msg_status = 'Почетный удален';
-        $msg_status = $id;
-        return ('msg_status');
+        return compact('msg_status');
     }
 }

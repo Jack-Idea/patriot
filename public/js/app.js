@@ -8482,6 +8482,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
@@ -8489,44 +8510,13 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
   data: function data() {
     return {
       preloader: false,
+      editble: false,
       fullName: '',
       birthday: '',
       place: 1,
       img: '',
       achievements: [],
       msgStatus: '',
-      // bests: [
-      //     {
-      //         "id": 1,
-      //         "fullname": "Макаренко Герман Артурович",
-      //         "birthday": "1988-06-16",
-      //         "achievements": [
-      //             "Первое место на чемпионате европы, бла бла бла, что то еще, надо увеличить количество текста", "Победа на первенстве город Муниципального образования Новороссийск", "asdsad as"
-      //         ],
-      //         "img": "1688103936.jpeg",
-      //         "number": 1
-      //     },
-      //     {
-      //         "id": 2,
-      //         "fullname": "Макаренко Герман Артурович",
-      //         "birthday": "1988-06-16",
-      //         "achievements": [
-      //             "ываыва ыва ыва", "asdfasd asd asdas d asd asd", "asdsad as"
-      //         ],
-      //         "img": "1688103936.jpeg",
-      //         "number": 2
-      //     },
-      //     {
-      //         "id": 3,
-      //         "fullname": "Макаренко Герман Артурович",
-      //         "birthday": "1988-06-16",
-      //         "achievements": [
-      //             "ываыва ыва ыва", "asdfasd asd asdas d asd asd", "asdsad as"
-      //         ],
-      //         "img": "1688103936.jpeg",
-      //         "number": 4
-      //     }
-      // ]
       bests: ''
     };
   },
@@ -8540,11 +8530,24 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
         self.bests = response.data.bests;
       });
     },
+    //Добавить ачивку при редактировании
+    addAchievement: function addAchievement(best) {
+      this.bests[best].achievements.push({
+        "title": " "
+      });
+    },
+    //Удалить ачивку при редактировании
+    removeAchievement: function removeAchievement(best, index) {
+      console.log(best, index);
+      this.bests[best].achievements.splice(index, 1);
+    },
+    //Добавить ачивку при создании
     addAchievementInput: function addAchievementInput() {
       this.achievements.push({
         "title": " "
       });
     },
+    //Удалить ачивку при создании
     removeAchievementInput: function removeAchievementInput(index) {
       this.achievements.splice(index, 1);
     },
@@ -8585,7 +8588,6 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
           self.preloader = false;
           self.fullName = '';
           self.birthday = '';
-          self.place = '';
           self.img = '';
           self.achievements = [];
         }, 1000);
@@ -8594,6 +8596,23 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
         }, 3000);
       })["catch"](function (error) {
         console.log(error);
+      });
+    },
+    editHonor: function editHonor(best) {
+      var self = this;
+      self.preloader = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/edit-honor', {
+        'best': best
+      }).then(function (response) {
+        self.msgStatus = response.data.msg_status;
+        setTimeout(function () {
+          self.preloader = false;
+          self.editble = false;
+          self.getBests();
+        }, 1000);
+        setTimeout(function () {
+          self.msgStatus = '';
+        }, 3000);
       });
     },
     // СОХРАНЕНИЕ КАРТИНОК
@@ -8627,10 +8646,9 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/destroy-honor', {
         "id": id
       }).then(function (response) {
-        self.msg_status = response.data.msg_status;
-        console.log(response.data.msg_status);
+        self.msgStatus = response.data.msg_status;
         setTimeout(function () {
-          self.preloader = true;
+          self.preloader = false;
           self.getBests();
         }, 1000);
         setTimeout(function () {
@@ -8659,10 +8677,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
 //
 //
 //
@@ -62564,6 +62578,40 @@ var render = function () {
                 )
               : _vm._e(),
             _vm._v(" "),
+            !_vm.editble
+              ? _c(
+                  "span",
+                  {
+                    staticClass:
+                      "absolute w-10 h-10 bg-yellow-500 top-4 right-4 rounded-full z-[100] cursor-pointer flex justify-center items-center",
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        _vm.editble = true
+                      },
+                    },
+                  },
+                  [_c("span", { attrs: { "uk-icon": "icon: pencil;" } })]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.editble && !_vm.preloader
+              ? _c(
+                  "span",
+                  {
+                    staticClass:
+                      "absolute w-10 h-10 bg-green-500 top-4 right-4 rounded-full z-[100] cursor-pointer flex justify-center items-center",
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.editHonor(best)
+                      },
+                    },
+                  },
+                  [_c("span", { attrs: { "uk-icon": "icon: check;" } })]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "span",
               {
@@ -62614,46 +62662,152 @@ var render = function () {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "ml-4 flex flex-col" }, [
-              _c("h5", { staticClass: "text-[var(--accent-color)] text-lg" }, [
-                _vm._v(_vm._s(best.fullname)),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex text-gray-600 mt-2 mb-6 md:mb-0" },
-                [
-                  _c("p", [_vm._v("Дата рождения:")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "ml-2 font-light" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "md:ml-4 flex flex-col w-full md:w-[60%] items-center md:items-start",
+              },
+              [
+                !_vm.editble
+                  ? _c(
+                      "h5",
+                      {
+                        staticClass:
+                          "text-[var(--accent-color)] text-lg text-center md:text-start",
+                      },
+                      [_vm._v(_vm._s(best.full_name))]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.editble
+                  ? _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: best.full_name,
+                          expression: "best.full_name",
+                        },
+                      ],
+                      staticClass: "flex w-full",
+                      attrs: { type: "text" },
+                      domProps: { value: best.full_name },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(best, "full_name", $event.target.value)
+                        },
+                      },
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex text-gray-600 mt-2 md:mb-0 justify-center md:justify-start",
+                  },
+                  [
+                    !_vm.editble
+                      ? _c("p", [_vm._v("Дата рождения:")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.editble
+                      ? _c("p", { staticClass: "ml-2 font-light" }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm._f("moment")(best.birthday, "DD.MM.YYYY")
+                            )
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.editble
+                      ? _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: best.birthday,
+                              expression: "best.birthday",
+                            },
+                          ],
+                          staticClass: "flex w-full",
+                          attrs: { type: "date" },
+                          domProps: { value: best.birthday },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(best, "birthday", $event.target.value)
+                            },
+                          },
+                        })
+                      : _vm._e(),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex text-gray-600 mt-2 mb-6 md:mb-0 justify-center md:justify-start",
+                  },
+                  [
+                    !_vm.editble
+                      ? _c("p", [_vm._v("Место в списке:")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.editble
+                      ? _c("p", { staticClass: "ml-2" }, [
+                          _vm._v(_vm._s(best.place)),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.editble
+                      ? _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: best.place,
+                              expression: "best.place",
+                            },
+                          ],
+                          staticClass: "flex w-full",
+                          attrs: { type: "number" },
+                          domProps: { value: best.place },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(best, "place", $event.target.value)
+                            },
+                          },
+                        })
+                      : _vm._e(),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "main-btn mt-auto",
+                    attrs: { "uk-toggle": "target: #best-" + index },
+                  },
+                  [
                     _vm._v(
-                      _vm._s(_vm._f("moment")(best.birthday, "DD.MM.YYYY"))
+                      "\n                    Подробнее...\n                "
                     ),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex text-gray-600 mt-2 mb-6 md:mb-0" },
-                [
-                  _c("p", [_vm._v("Место в списке:")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "ml-2" }, [
-                    _vm._v(_vm._s(best.place)),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "main-btn mt-auto",
-                  attrs: { "uk-toggle": "target: #best-" + index },
-                },
-                [_vm._v("\n                    Подробнее...\n                ")]
-              ),
-            ]),
+                  ]
+                ),
+              ]
+            ),
             _vm._v(" "),
             _c("div", { attrs: { id: "best-" + index, "uk-modal": "" } }, [
               _c(
@@ -62663,6 +62817,40 @@ var render = function () {
                     "uk-modal-dialog uk-modal-body rounded-lg py-8 relative overflow-hidden",
                 },
                 [
+                  _vm.editble && !_vm.preloader
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "absolute w-10 h-10 bg-green-500 bottom-1 right-1 rounded-full z-[100] cursor-pointer flex justify-center items-center",
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.editHonor(best)
+                            },
+                          },
+                        },
+                        [_c("span", { attrs: { "uk-icon": "icon: check;" } })]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.editble && !_vm.preloader
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "absolute w-10 h-10 bg-gray-800 bottom-1 left-1 rounded-full z-[100] cursor-pointer flex justify-center items-center",
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.addAchievement(index)
+                            },
+                          },
+                        },
+                        [_c("span", { attrs: { "uk-icon": "icon: plus;" } })]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c(
                     "span",
                     {
@@ -62686,9 +62874,61 @@ var render = function () {
                       ]),
                       _vm._v(" "),
                       _vm._l(best.achievements, function (achievements) {
-                        return _c("p", { staticClass: "text-gray-600 mb-3" }, [
-                          _vm._v(_vm._s(achievements.title)),
-                        ])
+                        return !_vm.editble
+                          ? _c("p", { staticClass: "text-gray-600 mb-3" }, [
+                              _vm._v(_vm._s(achievements.title)),
+                            ])
+                          : _vm._e()
+                      }),
+                      _vm._v(" "),
+                      _vm._l(best.achievements, function (achievements, indx) {
+                        return _vm.editble
+                          ? _c("div", { staticClass: "flex relative mt-3" }, [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "absolute bg-red-400 text-white px-2 right-0 w-8 h-8 flex justify-center items-center z-[900] cursor-pointer",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.removeAchievement(index, indx)
+                                    },
+                                  },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                X\n                            "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: achievements.title,
+                                    expression: "achievements.title",
+                                  },
+                                ],
+                                staticClass: "flex w-full",
+                                attrs: { type: "text" },
+                                domProps: { value: achievements.title },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      achievements,
+                                      "title",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ])
+                          : _vm._e()
                       }),
                     ],
                     2
@@ -62803,14 +63043,22 @@ var render = function () {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "ml-4 flex flex-col" }, [
-              _c("h5", { staticClass: "text-[var(--accent-color)] text-lg" }, [
-                _vm._v(_vm._s(best.fullname)),
-              ]),
+            _c("div", { staticClass: "md:ml-4 flex flex-col" }, [
+              _c(
+                "h5",
+                {
+                  staticClass:
+                    "text-[var(--accent-color)] text-lg text-center md:text-start",
+                },
+                [_vm._v(_vm._s(best.full_name))]
+              ),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "flex text-gray-600 mt-2 mb-6 md:mb-0" },
+                {
+                  staticClass:
+                    "flex text-gray-600 mt-2 mb-5 md:mb-0 justify-center md:justify-start",
+                },
                 [
                   _c("p", [_vm._v("Дата рождения:")]),
                   _vm._v(" "),
@@ -62818,18 +63066,6 @@ var render = function () {
                     _vm._v(
                       _vm._s(_vm._f("moment")(best.birthday, "DD.MM.YYYY"))
                     ),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex text-gray-600 mt-2 mb-6 md:mb-0" },
-                [
-                  _c("p", [_vm._v("Место в списке:")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "ml-2" }, [
-                    _vm._v(_vm._s(best.place)),
                   ]),
                 ]
               ),

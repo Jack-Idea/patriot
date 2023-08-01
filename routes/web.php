@@ -75,6 +75,7 @@ Route::post('/destroy-medalist', [AdminCompetitionsController::class, 'deleteMed
 //ADMIN HONOR
 Route::post('/store-honor', [AdminHonorController::class, 'storeHonor']);
 Route::post('/store-honor-img', [AdminHonorController::class, 'storeHonorImg']);
+Route::post('/edit-honor', [AdminHonorController::class, 'editHonor']);
 Route::post('/destroy-honor', [AdminHonorController::class, 'destroyHonor']);
     
 //DELETE HOME

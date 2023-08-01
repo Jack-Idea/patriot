@@ -49,6 +49,12 @@
                 <span v-if="!preloader" @click.prevent="destroyHonor(best.id)" class="absolute w-10 h-10 bg-red-600 top-4 left-4 rounded-full z-[100] cursor-pointer flex justify-center items-center">
                     <span uk-icon="icon: trash;"></span>
                 </span>
+                <span v-if="!editble" @click.prevent="editble = true" class="absolute w-10 h-10 bg-yellow-500 top-4 right-4 rounded-full z-[100] cursor-pointer flex justify-center items-center">
+                    <span uk-icon="icon: pencil;"></span>
+                </span>
+                <span v-if="editble && !preloader" @click.prevent="editHonor(best)" class="absolute w-10 h-10 bg-green-500 top-4 right-4 rounded-full z-[100] cursor-pointer flex justify-center items-center">
+                    <span uk-icon="icon: check;"></span>
+                </span>
                 <span class="best-number absolute text-gray-500 -bottom-5 -right-5 md:-top-8 md:-right-7 font-black leading-none opacity-10">#{{ best.place }}</span>
                 <img v-if="best.img" :src="'/img/uploads/honors/'+best.img" class="w-full md:w-[200px] rounded-lg mb-5 md:mb-0" alt="">
                 <div v-if="!best.img" class="none-img w-full md:w-[200px] rounded-lg mb-5 md:mb-0 bg-gray-100 text-gray-300 flex justify-center items-center">
@@ -56,15 +62,18 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </div>
-                <div class="ml-4 flex flex-col">
-                    <h5 class="text-[var(--accent-color)] text-lg">{{ best.fullname }}</h5>
-                    <div class="flex text-gray-600 mt-2 mb-6 md:mb-0">
-                        <p>Дата рождения:</p>
-                        <p class="ml-2 font-light">{{ best.birthday | moment('DD.MM.YYYY') }}</p>
+                <div class="md:ml-4 flex flex-col w-full md:w-[60%] items-center md:items-start">
+                    <h5 v-if="!editble" class="text-[var(--accent-color)] text-lg text-center md:text-start">{{ best.full_name }}</h5>
+                    <input v-if="editble" type="text" class="flex w-full" v-model="best.full_name">
+                    <div class="flex text-gray-600 mt-2 md:mb-0 justify-center md:justify-start">
+                        <p v-if="!editble">Дата рождения:</p>
+                        <p v-if="!editble" class="ml-2 font-light">{{ best.birthday | moment('DD.MM.YYYY') }}</p>
+                        <input v-if="editble" type="date" class="flex w-full" v-model="best.birthday">
                     </div>
-                    <div class="flex text-gray-600 mt-2 mb-6 md:mb-0">
-                        <p>Место в списке:</p>
-                        <p class="ml-2">{{ best.place }}</p>
+                    <div class="flex text-gray-600 mt-2 mb-6 md:mb-0 justify-center md:justify-start">
+                        <p v-if="!editble">Место в списке:</p>
+                        <p v-if="!editble" class="ml-2">{{ best.place }}</p>
+                        <input v-if="editble" type="number" class="flex w-full" v-model="best.place">
                     </div>
                     <button class="main-btn mt-auto" :uk-toggle="'target: #best-'+index">
                         Подробнее...
@@ -73,11 +82,23 @@
                 <!-- This is the BEST modal -->
                 <div :id="'best-'+index" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body rounded-lg py-8 relative overflow-hidden">
+                        <span v-if="editble && !preloader" @click.prevent="editHonor(best)" class="absolute w-10 h-10 bg-green-500 bottom-1 right-1 rounded-full z-[100] cursor-pointer flex justify-center items-center">
+                            <span uk-icon="icon: check;"></span>
+                        </span>
+                        <span v-if="editble && !preloader" @click.prevent="addAchievement(index)" class="absolute w-10 h-10 bg-gray-800 bottom-1 left-1 rounded-full z-[100] cursor-pointer flex justify-center items-center">
+                            <span uk-icon="icon: plus;"></span>
+                        </span>
                         <span class="best-number absolute text-gray-500 -bottom-5 -right-5 md:-right-7 font-black leading-none opacity-10">#{{ best.place }}</span>
                         <button class="uk-modal-close-default" uk-close></button>
                         <div class="py-5">
                             <h4 class="uppercase font-medium mb-5">Достижения</h4>
-                            <p v-for="achievements in best.achievements" class="text-gray-600 mb-3">{{ achievements.title }}</p>
+                            <p v-if="!editble" v-for="achievements in best.achievements" class="text-gray-600 mb-3">{{ achievements.title }}</p>
+                            <div v-if="editble" v-for="(achievements, indx) in best.achievements" class="flex relative mt-3">
+                                <span @click="removeAchievement(index, indx)" class="absolute bg-red-400 text-white px-2 right-0 w-8 h-8 flex justify-center items-center z-[900] cursor-pointer">
+                                    X
+                                </span>
+                                <textarea type="text" class="flex w-full" v-model="achievements.title"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -135,44 +156,13 @@ import axios from 'axios';
         data() {
             return {
                 preloader: false,
+                editble: false,
                 fullName: '',
                 birthday: '',
                 place: 1,
                 img: '',
                 achievements: [],
                 msgStatus: '',
-                // bests: [
-                //     {
-                //         "id": 1,
-                //         "fullname": "Макаренко Герман Артурович",
-                //         "birthday": "1988-06-16",
-                //         "achievements": [
-                //             "Первое место на чемпионате европы, бла бла бла, что то еще, надо увеличить количество текста", "Победа на первенстве город Муниципального образования Новороссийск", "asdsad as"
-                //         ],
-                //         "img": "1688103936.jpeg",
-                //         "number": 1
-                //     },
-                //     {
-                //         "id": 2,
-                //         "fullname": "Макаренко Герман Артурович",
-                //         "birthday": "1988-06-16",
-                //         "achievements": [
-                //             "ываыва ыва ыва", "asdfasd asd asdas d asd asd", "asdsad as"
-                //         ],
-                //         "img": "1688103936.jpeg",
-                //         "number": 2
-                //     },
-                //     {
-                //         "id": 3,
-                //         "fullname": "Макаренко Герман Артурович",
-                //         "birthday": "1988-06-16",
-                //         "achievements": [
-                //             "ываыва ыва ыва", "asdfasd asd asdas d asd asd", "asdsad as"
-                //         ],
-                //         "img": "1688103936.jpeg",
-                //         "number": 4
-                //     }
-                // ]
                 bests: ''
             }
         },
@@ -188,9 +178,20 @@ import axios from 'axios';
                         self.bests = response.data.bests
                     })
             },
+            //Добавить ачивку при редактировании
+            addAchievement(best) {
+                this.bests[best].achievements.push({"title": " "})
+            },
+            //Удалить ачивку при редактировании
+            removeAchievement(best, index) {
+                console.log(best, index)
+                this.bests[best].achievements.splice(index, 1)
+            },
+            //Добавить ачивку при создании
             addAchievementInput() {
                 this.achievements.push({"title": " "})
             },
+            //Удалить ачивку при создании
             removeAchievementInput(index) {
                 this.achievements.splice(index, 1)
             },
@@ -234,7 +235,6 @@ import axios from 'axios';
                             self.preloader = false
                             self.fullName = ''
                             self.birthday = ''
-                            self.place = ''
                             self.img = ''
                             self.achievements = []
                         }, 1000)
@@ -243,6 +243,25 @@ import axios from 'axios';
                         }, 3000)
                     })
                     .catch((error) => {console.log(error)})
+            },
+            editHonor(best) {
+                let self = this
+                self.preloader = true
+                axios
+                    .post('/edit-honor', {
+                        'best': best
+                    })
+                    .then(function(response) {
+                        self.msgStatus = response.data.msg_status
+                        setTimeout(() => {
+                            self.preloader = false
+                            self.editble = false
+                            self.getBests()
+                        }, 1000)
+                        setTimeout(() => {
+                            self.msgStatus = ''
+                        }, 3000)
+                    })
             },
             // СОХРАНЕНИЕ КАРТИНОК
             fileUpload(e) {
@@ -281,10 +300,9 @@ import axios from 'axios';
                         "id": id
                     })
                     .then(function(response) {
-                        self.msg_status = response.data.msg_status
-                        console.log(response.data.msg_status)
+                        self.msgStatus = response.data.msg_status
                         setTimeout(() => {
-                            self.preloader = true
+                            self.preloader = false
                             self.getBests()
                         }, 1000)
                         setTimeout(() => {
