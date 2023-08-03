@@ -11,6 +11,7 @@ use App\Http\Controllers\CompetitionsController;
 use App\Http\Controllers\AdminCompetitionsController;
 use App\Http\Controllers\AdminHonorController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\FederationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,22 @@ Route::get('/get-bests', [LandingController::class, 'getHonor']);
 // CONTACTS PAGE
 Route::get('/contacts', [ContactsController::class, 'index']);
 
+// FEDERATION PAGES
+// views pages
+Route::get('/federation', [FederationController::class, 'index']);
+Route::get('/federation/photo', [FederationController::class, 'photo']);
+Route::get('/federation/contacts', [FederationController::class, 'contacts']);
+// news
+Route::get('/federation/news', [FederationController::class, 'news']);
+Route::get('/federation/get-news', [FederationController::class, 'fedGetNews']);
+Route::get('/federation/news/{id}', [NewsController::class, 'viewOneNews']);
+// competitions
+Route::get('/federation/competitions', [FederationController::class, 'competitions']);
+Route::get('/federation/competitions/{id}', [FederationController::class, 'showCompetition']);
+// docs
+Route::get('/federation/docs', [FederationController::class, 'docs']);
+Route::get('/get-docs', [FederationController::class, 'getDocs']);
+
 Auth::routes();
 
 // ADMIN
@@ -77,6 +94,9 @@ Route::post('/store-honor', [AdminHonorController::class, 'storeHonor']);
 Route::post('/store-honor-img', [AdminHonorController::class, 'storeHonorImg']);
 Route::post('/edit-honor', [AdminHonorController::class, 'editHonor']);
 Route::post('/destroy-honor', [AdminHonorController::class, 'destroyHonor']);
+// ADMIN DOCS
+Route::post('/store-docs', [AdminController::class, 'storeDocs']);
+Route::post('/destroy-docs', [AdminController::class, 'destroyDocs']);
     
 //DELETE HOME
 Route::get('/welcome', [AdminController::class, 'welcome']);

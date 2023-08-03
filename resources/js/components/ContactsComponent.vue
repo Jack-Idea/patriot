@@ -4,7 +4,7 @@
         <div class="w-full lg:w-[45%] flex flex-col">
             <h2 class="text-3xl uppercase font-medium text-[var(--accent-color)] mb-5">Контакты</h2>
             <div class="flex">
-                <p class="text-[#2d2d2d] text-lg font-medium">Директор:</p>
+                <p v-if="contacts" class="text-[#2d2d2d] text-lg font-medium">{{ contacts[0].jobTitle }}:</p>
                 <p v-if="contacts" class="text-gray-600 text-lg ml-2">{{ contacts[0].fullName }}</p>
             </div>
             <div class="flex flex-col lg:flex-row justify-between lg:mt-auto">
@@ -69,7 +69,8 @@
     export default {
         data() {
             return {
-                contacts: ''
+                contacts: '',
+                isFederation: false
             }
         },
         mounted() {
@@ -84,11 +85,23 @@
             },
             getInfo() {      
                 let self = this
-                axios
-                    .get('/js/contacts.json')
-                    .then(function (response) {
-                        self.contacts = response.data.contacts
-                    })
+                let href = window.location.pathname
+                let federation = href.split('/')[1]
+                if (federation !== 'federation') {
+                    self.isFederation = false
+                    axios
+                        .get('/js/contacts.json')
+                        .then(function (response) {
+                            self.contacts = response.data.contacts
+                        })
+                } else {
+                    self.isFederation = true
+                    axios
+                    .get('/js/federationContacts.json')
+                        .then(function (response) {
+                            self.contacts = response.data.contacts
+                        })
+                }
             }
         }
     }

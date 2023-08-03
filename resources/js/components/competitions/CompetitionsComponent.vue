@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <div class="nav-wrap fixed left-0 top-24 flex z-50">
+        <div v-if="competitionsView" class="nav-wrap fixed left-0 top-24 flex z-50">
             <div class="flex flex-col bg-[var(--accent-color)] pl-10 pr-16 py-5 pt-[19px] items-start rounded-br-lg relative">
                 <span id="marker" class="nav-btn-marker"></span>
                 <button @click.prevent="selectCat(1)" id="navBtn1" :class="{ 'active': selectedCat === 1 }" class="nav-btn text-white mb-7">Календарь</button>
@@ -13,7 +13,7 @@
                 </svg>
             </div>
         </div>
-        <calendar-component v-show="selectedCat === 1"></calendar-component>
+        <calendar-component :competitionsView="competitionsView" v-show="selectedCat === 1"></calendar-component>
         <medalists-component v-show="selectedCat === 2"></medalists-component>
     </div>
 </template>
@@ -52,6 +52,7 @@
         data() {
             return {
                 menu: true,
+                competitionsView: true,
                 selectedCat: 1
             }
         },
@@ -66,6 +67,13 @@
                     setTimeout(() => {
                         this.menu = false
                     }, 1000)
+                }
+                let href = window.location.pathname
+                let federation = href.split('/')[1]
+                if (federation !== 'federation') {
+                    this.competitionsView = true
+                } else {
+                    this.competitionsView = false
                 }
             },
             selectCat(id) {

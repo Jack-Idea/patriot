@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\Models\News;
+use App\Models\Doc;
 
 class AdminController extends Controller
 {
@@ -37,6 +38,16 @@ class AdminController extends Controller
             'imgs' => request('imgs'),
         ]);
         $msg_status = 'Новость успешно сохранена';
+        return compact('msg_status');
+    }
+
+    //STORE DOCS
+    public function storeDocs(Request $request) {
+        Doc::create([
+            "title" => request("title"),
+            "link" => request("link")
+        ]);
+        $msg_status = "Документ добавлен";
         return compact('msg_status');
     }
 
@@ -158,5 +169,12 @@ class AdminController extends Controller
         $news->delete();
         $msg_status = 'Новость успешна удалена';
         return compact('msg_status', 'news');
+    }
+    // DESTROY DOCS
+    public function destroyDocs(Request $request) {
+        $docs = Doc::find(request('id'));
+        $docs->delete();
+        $msg_status = "Документ удален";
+        return compact('msg_status');
     }
 }

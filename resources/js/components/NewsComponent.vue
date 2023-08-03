@@ -10,7 +10,8 @@
                 </div>
             </div>
             <div class="flex justify-between items-center text-[#2d2d2d] px-5 h-[20%] min-h-[70px] font-light">
-                <a :href="'/news/'+item.id" class="flex hover:text-[#2d2d2d]">Подробнее...</a>
+                <a v-if="!isFederation" :href="'/news/'+item.id" class="flex hover:text-[#2d2d2d]">Подробнее...</a>
+                <a v-if="isFederation" :href="'/federation/news/'+item.id" class="flex hover:text-[#2d2d2d]">Подробнее...</a>
                 <span class="flex font-normal opacity-50">{{ item.created_at }}</span>
             </div>
         </div>
@@ -33,7 +34,8 @@
         props: ['quantity'],
         data() {
             return {
-                news: []
+                news: [],
+                isFederation: false
             }
         },
         mounted() {
@@ -42,11 +44,23 @@
         methods: {
             getNews() {
                 let self = this
-                axios
-                    .get('/get-news')
-                    .then(function (response) {
-                        self.news = response.data.news
-                    })
+                let href = window.location.pathname
+                let federation = href.split('/')[1]
+                if (federation !== 'federation') {
+                    self.isFederation = false
+                    axios
+                        .get('/get-news')
+                        .then(function (response) {
+                            self.news = response.data.news
+                        })
+                } else {
+                    self.isFederation = true
+                    axios
+                        .get('/federation/get-news')
+                        .then(function (response) {
+                            self.news = response.data.news
+                        })
+                }
             },
             formatDate() {
                 let self = this

@@ -244,10 +244,10 @@
                         "title": "Новороссийская Городская общественная организация «Федерация борьбы самбо и дзюдо»",
                         "shortTitle": "Федерация борьбы самбо и дзюдо",
                         "img": "hall.jpg",
-                        "logo": "logo",
+                        "logo": "logo-federation",
                         "class": "struggle",
                         "tel": 79184880722,
-                        "link": "/struggle"
+                        "link": "/federation"
                     },
                     {
                         "id": 3,

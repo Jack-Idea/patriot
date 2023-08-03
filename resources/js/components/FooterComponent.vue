@@ -3,8 +3,11 @@
         <div class="container mx-auto flex flex-wrap px-[5%] py-5 flex-col md:flex-row items-center">
             <div class="flex w-full items-center">
                 <div class="w-1/3 h-0.5 bg-white flex justify-center"></div>
-                <a href="/patriot" class="w-1/3 flex justify-center">
+                <a v-if="footerView" href="/patriot" class="w-1/3 flex justify-center">
                     <img src="/img/logo.png" class="logo lg:w-40 scale-100" alt="">
+                </a>
+                <a v-if="!footerView" href="/patriot" class="w-1/3 flex justify-center">
+                    <img src="/img/logo-federation.png" class="logo lg:w-40 scale-100" alt="">
                 </a>
                 <div class="w-1/3 h-0.5 bg-white flex justify-center"></div>
             </div>
@@ -35,6 +38,7 @@
         data() {
             return {
                 footer: false,
+                footerView: true,
                 todayYear: ''
             }
         },
@@ -45,8 +49,14 @@
         methods: {
             checkFooterPage() {
                 let href = window.location.pathname
+                let federation = href.split('/')[1]
                 if (href !== '/') {
                     this.footer = true
+                }
+                if (federation === 'federation') {
+                    this.footerView = false
+                } else {
+                    this.footerView = true
                 }
             },
             getYear() {

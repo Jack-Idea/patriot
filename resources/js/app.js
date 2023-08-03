@@ -45,12 +45,16 @@ Vue.component('gallery-component', require('./components/gallery/GalleryComponen
 Vue.component('honor-component', require('./components/honor/HonorComponent.vue').default);
 // CONTACTS
 Vue.component('contacts-component', require('./components/ContactsComponent.vue').default);
+// FEDERATION PAGES
+Vue.component('landing-federation-component', require('./components/federation/LandingFederationComponent.vue').default);
+Vue.component('docs-federation-component', require('./components/federation/DocsFederationComponent.vue').default);
 // ADMIN
 Vue.component('admin-component', require('./components/AdminComponent.vue').default);
 Vue.component('add-news-component', require('./components/AddNewsComponent.vue').default);
 Vue.component('add-competitions-component', require('./components/competitions/AddCompetitionsComponent.vue').default);
 Vue.component('add-medalists-component', require('./components/competitions/AddMedalistsComponent.vue').default);
 Vue.component('add-honor-component', require('./components/honor/AddHonorComponent.vue').default);
+Vue.component('add-docs-component', require('./components/federation/AddDocsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

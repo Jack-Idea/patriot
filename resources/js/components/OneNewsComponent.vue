@@ -8,7 +8,7 @@
                 <img v-if="news" :src="'/img/uploads/news/'+news.img" class="w-full" alt="">
             </div>
             <div class="md:w-[45%]">
-                <p class="text-[#555] whitespace-pre">{{ news.description }}</p>
+                <p class="text-[#555] whitespace-pre-wrap">{{ news.description }}</p>
             </div>
             <div class="lg:w-[85%] flex flex-wrap gap-4">
                 <div v-if="news" v-for="img in news.imgs" class="multiple-imgs">
@@ -40,9 +40,15 @@
         methods: {
             getNews() {
                 let self = this
+                let href = window.location.pathname
+                let federation = href.split('/')[1]
                 let id = window.location.pathname
                 id = id.split('/')
-                id = id[2]
+                if (federation !== 'federation') {
+                    id = id[2]
+                } else {
+                    id = id[3]
+                }
                 axios
                     .post('/get-one-news', {
                         'id': id

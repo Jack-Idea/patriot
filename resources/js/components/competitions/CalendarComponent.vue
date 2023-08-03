@@ -18,7 +18,8 @@
                     <h6 class="lg:w-[40%] text-center lg:text-left mb-4 lg:mb-0 text-lg">{{ tournir.title }}</h6>
                     <p class="flex text-gray-600 lg:w-[20%] text-center justify-center mb-4 lg:mb-0">{{ tournir.location }}</p>
                     <p class="flex text-gray-600 lg:w-[20%] text-center lg:text-left mb-4 lg:mb-0">{{ tournir.category }}</p>
-                    <a :href="'/competitions/'+tournir.id" class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</a>
+                    <a v-if="competitionsView" :href="'/competitions/'+tournir.id" class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</a>
+                    <a v-if="!competitionsView" :href="'/federation/competitions/'+tournir.id" class="main-btn more-btn flex mb-2 lg:mb-0">Подробнее</a>
                 </div>
             </div>
         </div>
@@ -54,6 +55,7 @@
 <script>
     Vue.use(require('vue-moment'));
     export default {
+        props: ['competitionsView'],
         data() {
             return {
                 news: [],
