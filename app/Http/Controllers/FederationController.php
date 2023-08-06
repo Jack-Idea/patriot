@@ -24,6 +24,10 @@ class FederationController extends Controller
         $news = News::where('federation', true)->orderBy('created_at', 'desc')->get();
         return compact('news');
     }
+    // PHOTO
+    public function photo() {
+        return view('federation.photo');
+    }
     // COMPETITIONS
     public function competitions() {
         return view('federation.competitions');

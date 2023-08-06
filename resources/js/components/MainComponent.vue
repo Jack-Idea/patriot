@@ -10,15 +10,32 @@
             <div class="absolute flex justify-center w-full lg:items-center lg:left-[5%] lg:bottom-[5%] top-32 bottom-0 lg:bottom-auto lg:top-auto">
                 <div class="flex flex-col absolute lg:left-0 top-0 lg:top-auto bottom-[5%] lg:bottom-auto w-10/12 lg:w-2/5 mt-8 items-end lg:items-start">
                     <h2 id="mainTitle" class="text-black uppercase px-[5%] py-[5%] lg:py-[3%] w-full rounded-lg lg:rounded-l-none main-title justify-center lg:justify-start text-center lg:text-start">{{ selectedOrg.title }}</h2>
-                    <!-- <p class="flex mt-auto lg:mt-5 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start w-[220px]">Каждый месяц у нас занимается более 1000 человек</p>
-                    <p class="mt-2 lg:pl-[5%] text-[#2d2d2d] lg:text-white font-light text-end lg:text-start">Занятия с 5-ти лет</p> -->
                     <!-- BTN TO SITE -->
-                    <a :href="selectedOrg.link" id="mainBtn" class="btn-to-site flex items-center shadow-lg mt-7 lg:ml-[5%]">
-                        Перейти на сайт
+                    <a v-if="selectedSection !== 4" :href="selectedOrg.link" id="mainBtn" class="btn-to-site flex items-center shadow-lg mt-7 lg:ml-[5%]">
+                        На сайт
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="btn-to-site__icon ml-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                         </svg>
                     </a>
+                    <a v-if="selectedSection === 4" id="mainBtn" class="btn-to-site flex items-center shadow-lg mt-7 lg:ml-[5%]" uk-toggle="target: #modal-close-default">
+                        Контакты
+                    </a>
+                    <!-- This is the modal with the default close button -->
+                    <div id="modal-close-default" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body rounded-lg">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <div>
+                                <h2 class="uk-modal-title">Аренда полей</h2>
+                                <p class="text-gray-800 mt-2">Ботев Евгений Владимирович</p>
+                                <a href="tel:+79183880989" class="text-gray-800 mt-2">+7 (918) 388-09-89</a>
+                            </div>
+                            <div class="mt-10">
+                                <h2 class="uk-modal-title">Аренда зала</h2>
+                                <p class="text-gray-800 mt-2">Гуляева Анастасия Игоревна</p>
+                                <a href="tel:+79181716666" class="text-gray-800 mt-2">+7 (918) 171-66-66</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

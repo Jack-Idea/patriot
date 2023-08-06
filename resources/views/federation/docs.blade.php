@@ -8,6 +8,7 @@
 
     <div class="container min-h-screen py-20 pt-10 relative overflow-hidden">
         <img src="/img/logo-bg.svg" class="fixed top-[20%] lg:top-[-5%] left-[-80%] lg:left-[-50%] z-[-1] opacity-30 rotate-90 lg:rotate-0" style="pointer-events: none;" alt="">
+        <h3 class="uppercase font-medium text-3xl text-[var(--accent-color)] text-center lg:text-left">Документы</h3>
         <docs-federation-component></docs-federation-component>
     </div>
 
